@@ -1,0 +1,81 @@
+---
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en');
+
+// Ziel-Link zur jeweils anderen Sprache
+const germanLink = currentPath.replace(/^\/en/, '') || '/';
+const englishLink = currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`;
+---
+
+<div class="language-switcher">
+  <details>
+    <summary>
+      <span aria-label={isEnglish ? "English" : "Deutsch"}>
+        {isEnglish ? "🇬🇧" : "🇩🇪"}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#fff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>      </span>
+    </summary>
+    <ul>
+      <li><a href={germanLink}>🇩🇪 Deutsch</a></li>
+      <li><a href={englishLink}>🇬🇧 English</a></li>
+    </ul>
+  </details>
+</div>
+
+<style lang="scss">
+.language-switcher {
+  position: relative;
+  font-size: 1rem;
+}
+
+.language-switcher summary {
+  list-style: none;
+  cursor: pointer;
+  background: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  border: #fff 3px solid;
+  border-radius: 10%;
+  line-height: 2rem;
+
+    svg{
+        width: 1.3rem;
+    }
+}
+
+.language-switcher summary::-webkit-details-marker {
+  display: none;
+}
+
+.language-switcher ul {
+  position: absolute;
+  z-index: 1000;
+  width: 7rem;
+  top: 100%;
+  right: 0;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  list-style: none;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.language-switcher li {
+  margin: 0;
+}
+
+.language-switcher a {
+  text-decoration: none;
+  color: #222;
+  display: block;
+  padding: 0.25rem 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.language-switcher a:hover {
+  background: #f0f0f0;
+}
+</style>
