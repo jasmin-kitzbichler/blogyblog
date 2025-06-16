@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BlogTeaser from '../components/BlogTeaser.astro';
+import ProjectTeaser from '../components/ProjectTeaser.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -13,37 +15,126 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<div class="width-container">
+					<div class="hero-text">
+						<div class="name">
+							<p>Hi, ich bin</p>
+							<h1>Jasmin</h1>
+						</div>
+						<span></span>
+						<p>SVG Kufstein, Österreich</p>
+						<span></span>
+						<p class="desc">Sportschützin , Digitalbastlerin und jemand der in jeder Zeile Code und jedem Foto ein Stück Persönlichkeit versteckt</p>
+						<span></span>
+						<p>Willkommen auf meiner Webseite, ich hoffe du findest etwas interessantes! ☺️</p>
+						<p>Social Icons</p>
+					</div>
+		
+					<div class="hero-images">
+						<svg viewBox="0 0 200 200" class="hero-circle">
+						<defs>
+							<clipPath id="slice1">
+							<path d="M100,100 L100,0 A100,100 0 0,1 186.6,150 z" />
+							</clipPath>
+							<clipPath id="slice2">
+							<path d="M100,100 L186.6,150 A100,100 0 0,1 13.4,150 z" />
+							</clipPath>
+							<clipPath id="slice3">
+							<path d="M100,100 L13.4,150 A100,100 0 0,1 100,0 z" />
+							</clipPath>
+						</defs>
+	
+						<image href="/src/assets/blog-placeholder-1.jpg" width="200" height="200"
+								clip-path="url(#slice1)" preserveAspectRatio="xMidYMid slice" />
+						<image href="/src/assets/blog-placeholder-2.jpg" width="200" height="200"
+								clip-path="url(#slice2)" preserveAspectRatio="xMidYMid slice" />
+						<image href="/src/assets/blog-placeholder-3.jpg" width="200" height="200"
+								clip-path="url(#slice3)" preserveAspectRatio="xMidYMid slice" />
+						</svg>
+	
+					</div>
+
+				</div>
+
+			</section>
+
+
+			<BlogTeaser />
+			<ProjectTeaser/>
+
+
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style lang="scss">
+	.hero .width-container {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	}
+	
+	.hero-text{
+		p {
+			width: 85%;
+		}
+		span {
+			display: block;
+			width: 100%;
+			border-bottom: 3px solid #fff;
+		}
+
+		.name{
+			p{
+				font-weight: 600;
+				font-size: 1.2rem;
+				margin: 0;
+			}
+
+			h1{
+				font-size: 5.4rem;
+				margin-top: -0.2em;
+				font-weight: 800;
+			}
+		}
+
+		.desc{
+			font-weight: 600;
+		}
+	}
+
+	.hero-images {
+	flex: 1 1 320px;
+	max-width: 500px;
+	display: flex;
+	justify-content: center;
+	margin: 0 1rem;
+	}
+
+	.hero-circle {
+	width: 550px;
+	height: 550px;
+	display: block;
+	aspect-ratio: 1;
+	overflow: visible;
+	}
+
+	.hero-circle image {
+	transform-origin: 50% 50%;
+	transition: transform 0.3s ease;
+
+	}
+
+	.hero-circle image:nth-of-type(1) {
+  	transform: translate(5px, -5px);
+	}
+	.hero-circle image:nth-of-type(2) {
+	transform: translate(0px, 5px);
+	}
+	.hero-circle image:nth-of-type(3) {
+	transform: translate(-5px, -5px);
+	}
+</style>

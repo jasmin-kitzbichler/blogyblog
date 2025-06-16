@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { Image } from 'astro:assets';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<section class="blog-preview">
+    <div class="width-container">
+        <h2>Neu im Blog</h2>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}/`}>
+                  {post.data.heroImage && (
+                    <Image src={post.data.heroImage} width={400} height={200} alt="" />
+                  )}
+                  <h3>{post.data.title}</h3>
+                  <p class="date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="more-link">
+          <a href="/blog">Alle Beiträge ansehen →</a>
+        </p>
+    </div>
+</section>
+
+<style>
+.blog-preview {
+  margin-top: 4rem;
+  background-color: #fff;
+}
+.blog-preview ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.blog-preview li {
+  width: calc(33.333% - 1.333rem);
+}
+.blog-preview a {
+  text-decoration: none;
+  color: inherit;
+}
+.blog-preview h3 {
+  margin: 0.5rem 0 0;
+}
+.blog-preview .date {
+  font-size: 0.9rem;
+  color: rgb(var(--gray));
+}
+.more-link {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .blog-preview li {
+    width: 100%;
+  }
+}
+</style>
