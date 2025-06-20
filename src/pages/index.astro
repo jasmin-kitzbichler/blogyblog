@@ -17,124 +17,152 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<main>
 			<section class="hero">
 				<div class="width-container">
-					<div class="hero-text">
-						<div class="name">
-							<p>Hi, ich bin</p>
-							<h1>Jasmin</h1>
+					<div class="hero-layout">
+						<div class="hero-left">
+							<div class="hero-text">
+								<p class="intro">Hi, ich bin</p>
+								<h1>Jasmin</h1>
+								<p class="location">📍 Kufstein, Österreich</p>
+
+							</div>
+							<div class="hero-photo">
+								<img src="/src/assets/hero-image2.png" alt="Hero portrait" class="hero-main-img" />
+							</div>
 						</div>
-						<span></span>
-						<p>SVG Kufstein, Österreich</p>
-						<span></span>
-						<p class="desc">Sportschützin , Digitalbastlerin und jemand der in jeder Zeile Code und jedem Foto ein Stück Persönlichkeit versteckt</p>
-						<span></span>
-						<p>Willkommen auf meiner Webseite, ich hoffe du findest etwas interessantes! ☺️</p>
-						<p>Social Icons</p>
+						
+						
+						<div class="hero-right">
+							<p class="desc">Sportschützin, Digitalbastlerin und jemand der in jeder Zeile Code und jedem Foto ein Stück Persönlichkeit versteckt</p>
+							<p>Willkommen auf meiner Webseite, ich hoffe du findest etwas interessantes! ☺️</p>
+	
+						</div>
 					</div>
-		
-					<div class="hero-images">
-						<svg viewBox="0 0 200 200" class="hero-circle">
-						<defs>
-							<clipPath id="slice1">
-							<path d="M100,100 L100,0 A100,100 0 0,1 186.6,150 z" />
-							</clipPath>
-							<clipPath id="slice2">
-							<path d="M100,100 L186.6,150 A100,100 0 0,1 13.4,150 z" />
-							</clipPath>
-							<clipPath id="slice3">
-							<path d="M100,100 L13.4,150 A100,100 0 0,1 100,0 z" />
-							</clipPath>
-						</defs>
 	
-						<image href="/src/assets/blog-placeholder-1.jpg" width="200" height="200"
-								clip-path="url(#slice1)" preserveAspectRatio="xMidYMid slice" />
-						<image href="/src/assets/blog-placeholder-2.jpg" width="200" height="200"
-								clip-path="url(#slice2)" preserveAspectRatio="xMidYMid slice" />
-						<image href="/src/assets/blog-placeholder-3.jpg" width="200" height="200"
-								clip-path="url(#slice3)" preserveAspectRatio="xMidYMid slice" />
-						</svg>
-	
+					<div class="hero-trio">
+						<img class="img-behind" src="/src/assets/blog-placeholder-1.jpg" alt="Bild 1" />
+						<img src="/src/assets/blog-placeholder-2.jpg" alt="Bild 2" />
+						<img src="/src/assets/blog-placeholder-3.jpg" alt="Bild 3" />
 					</div>
 
 				</div>
-
 			</section>
-
 
 			<BlogTeaser />
 			<ProjectTeaser/>
-
-
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style lang="scss">
-	.hero .width-container {
+.hero {
+  background: var(--background);
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.hero-left{
 	display: flex;
-	gap: 2rem;
 	align-items: center;
-	justify-content: center;
-	}
-	
-	.hero-text{
-		p {
-			width: 85%;
-		}
-		span {
-			display: block;
-			width: 100%;
-			border-bottom: 3px solid #fff;
-		}
+	position: relative;
+	height: 500px;
 
-		.name{
-			p{
-				font-weight: 600;
-				font-size: 1.2rem;
-				margin: 0;
-			}
+}
 
-			h1{
-				font-size: 5.4rem;
-				margin-top: -0.2em;
-				font-weight: 800;
-			}
-		}
+.hero-left .intro {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+}
 
-		.desc{
-			font-weight: 600;
-		}
-	}
+.hero-left h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 0.8;
+}
 
-	.hero-images {
-	flex: 1 1 320px;
-	max-width: 500px;
-	display: flex;
-	justify-content: center;
-	margin: 0 1rem;
-	}
+.hero-left .location {
+  background: var(--accent-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.2em 0.8em;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  line-height: 2;
+}
 
-	.hero-circle {
-	width: 550px;
-	height: 550px;
-	display: block;
-	aspect-ratio: 1;
-	overflow: visible;
-	}
+.hero-right {
 
-	.hero-circle image {
-	transform-origin: 50% 50%;
-	transition: transform 0.3s ease;
+	text-align: end;
 
+	.desc {
+	  font-weight: 600;
+	  margin-bottom: 1rem;
+	  
 	}
+}
 
-	.hero-circle image:nth-of-type(1) {
-  	transform: translate(5px, -5px);
+.hero-photo {
+	position: absolute;
+	top: 0;
+	right: 0;
+	//transform: translate(80px, 0);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.hero-main-img {
+  width: 750px;
+  filter: grayscale(1);
+
+}
+
+.hero-trio {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .img-behind {
+	z-index: 1;
+  }
+}
+
+.hero-trio img {
+	width: 32%;
+	object-fit: cover;
+	border-radius: 16px;
+	box-shadow: var(--box-shadow);
+	position: relative;
+	z-index: 100;
+	height: 250px;
+	filter: grayscale(1);
+
+	&:hover {
+		filter: grayscale(0);
 	}
-	.hero-circle image:nth-of-type(2) {
-	transform: translate(0px, 5px);
-	}
-	.hero-circle image:nth-of-type(3) {
-	transform: translate(-5px, -5px);
-	}
+}
+
+@media (max-width: 720px) {
+  .hero-layout {
+    flex-direction: column;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-trio img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

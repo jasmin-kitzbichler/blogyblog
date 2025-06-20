@@ -5,7 +5,7 @@
 	--background: #d2e4ed;
 	--black: 28, 28, 30;
 	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
+	--gray-light: #E7E7E7;
 	--gray-dark: 34, 41, 57;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow:
@@ -85,7 +85,6 @@
 		width: 80%;
 		margin: auto;
 	}
-	padding: 3em 0em;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -118,6 +117,31 @@
   }
   .prose p {
 	margin-bottom: 2em;
+  }
+
+  .section-heading{
+	display: inline-block;
+	background-color: #fff;
+	width: 20rem;
+	border-radius: 0.5rem;
+	margin: 1rem 0;
+	box-shadow: var(--box-shadow);
+
+	h2 {
+
+		svg {
+			height: 1rem;
+			margin: 0 1rem;
+		}
+		.text{
+			box-shadow: 0 30px 40px rgba(0,0,0,.2);
+			width: fit-content;
+		}
+		font-size: 1.2rem;
+		font-family: Inter, serif;
+		font-weight: 600;
+		margin: 0.8rem 0;
+	}
   }
   
   input,

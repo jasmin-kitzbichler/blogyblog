@@ -1,7 +1,10 @@
 ---
 title: 'First post'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+pubDate: 'Jul 08 2024'
+category: 'tech'
+groupId: 'firstPost'
+lang: 'en'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 

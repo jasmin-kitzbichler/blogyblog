@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, category, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -75,6 +75,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						<p>{category}</p>
 						<hr />
 					</div>
 					<slot />

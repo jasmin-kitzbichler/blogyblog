@@ -1,16 +1,16 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
-import { getLocalizedPosts } from '../../getLocalizedPosts';
+import { getLocalizedPosts } from '../../../getLocalizedPosts';
 
 const allPosts = await getCollection('blog');
-const lang = 'de';
+const lang = 'en';
 const posts = getLocalizedPosts(allPosts, lang).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -105,7 +105,7 @@ const getLangEmoji = (lang: string): string => {
 		<Header />
 		<main>
 			<section>
-				<p>Hallo das ist die Deutsche Blog Übersicht</p>
+				<p>I'm the English Blog Page Bro</p>
 				<ul>
 					{
 						posts.map((post) => (
