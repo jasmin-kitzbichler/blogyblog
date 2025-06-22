@@ -1,16 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
-import FormattedDate from './FormattedDate.astro';
-import { Image } from 'astro:assets';
-import { getLocalizedPosts } from '../getLocalizedPosts';
-
-
+import { getCollection } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+import { Image } from "astro:assets";
+import { getLocalizedPosts } from "../getLocalizedPosts";
 
 // 1. Lade alle Blogposts
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection("blog");
 
 // 2. Hole die aktuelle Sprache aus dem Pfad
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'de';
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "de";
 
 // 3. Gruppiere und filtere mit deiner Hilfsfunktion
 const localizedPosts = getLocalizedPosts(allPosts, lang);
@@ -23,106 +21,217 @@ const posts = localizedPosts
 // 5. Sprach-Emoji-Funktion
 const getLangEmoji = (lang: string): string => {
   switch (lang) {
-    case 'de':
-      return '🇩🇪';
-    case 'en':
-      return '🇬🇧';
+    case "de":
+      return "🇩🇪";
+    case "en":
+      return "🇬🇧";
     default:
-      return '🌐';
+      return "🌐";
   }
 };
 ---
 
 <svg height="0" width="0">
-	<defs>
-		<clipPath id="svgPath">
-			<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10"  d="M330 0C338.837 0 346 7.16344 346 16V240H345.863C344.348 223.181 330.214 210 313 210C295.786 210 281.652 223.181 280.137 240H280V256C280 267.046 271.046 276 260 276H16C7.16344 276 1.61075e-07 268.837 0 260V16C0 7.16344 7.16344 0 16 0H330Z"/>
-		</clipPath>
-	</defs>
+  <defs>
+    <clipPath id="svgPath">
+      <path
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="1.5794"
+        stroke-miterlimit="10"
+        d="M330 0C338.837 0 346 7.16344 346 16V240H345.863C344.348 223.181 330.214 210 313 210C295.786 210 281.652 223.181 280.137 240H280V256C280 267.046 271.046 276 260 276H16C7.16344 276 1.61075e-07 268.837 0 260V16C0 7.16344 7.16344 0 16 0H330Z"
+      ></path>
+    </clipPath>
+  </defs>
 </svg>
 
 <section class="blog-preview">
-    <div class="width-container">
-        <span class="devider"></span>
-        <div class="section-heading">
-            <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg><span class="text">
-                Neues im Blog</span></h2>
-        </div>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/${post.id}/`}>
-                  {post.data.heroImage && (
-                    <Image src={post.data.heroImage} alt="" />
-                  )}
-                  <p class="lang">{getLangEmoji(post.data.lang)}</p>
-                  <p class="catgory">{post.data.category}</p>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                  <h3>{post.data.title}</h3>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <p class="more-link">
-          <a href="/blog">Alle Beiträge ansehen →</a>
-        </p>
+  <div class="width-container">
+    <span class="devider"></span>
+    <div class="section-heading">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+          ><path
+            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+          ></path></svg
+        ><span class="text"> Neues im Blog</span>
+      </h2>
     </div>
-
-
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>
+              <div class="blogteaserImage">
+                {post.data.heroImage && (
+                  <Image src={post.data.heroImage} alt="" />
+                )}
+                <p class="lang">{getLangEmoji(post.data.lang)}</p>
+                {post.data.category && (
+                  <p class="category">{post.data.category}</p>
+                )}
+                <p class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </p>
+              </div>
+            <div class="cardbottom">
+                <h3>{post.data.title}</h3>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+                </p>
+            </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="more-link">
+      <a href="/blog">Alle Beiträge ansehen →</a>
+    </p>
+  </div>
 </section>
 
-
 <style lang="scss">
+  .blog-preview {
+    margin-top: -6rem;
+    padding-bottom: 3rem;
+    padding-top: 8rem;
+    background-color: var(--gray-light);
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: var(--box-shadow-section);
 
 
-.blog-preview {
-  margin-top: -6rem;
-  padding-top: 8rem;
-  background-color: var(--gray-light);
-
-  .devider {
-    display: block;  
-    border-top: 0.2rem solid (var(--accent));
+    .devider {
+      display: block;
+      border-top: 0.2rem solid (var(--accent));
       width: 100%;
       height: 1px;
+    }
+
+    .blogteaserImage {
+
+        position: relative;
+        font-family: 'Inter', sans-serif;
+        margin: 0.5rem 0.5rem 0 0.5rem;
+
+
+        .lang {
+          background-color: white;
+          padding: 0.4rem 0.5rem;
+          border-radius: 0.5rem;
+          width: fit-content;
+          position: absolute;
+          top: 0;
+          right: 0;
+          margin: 1rem;
+          box-shadow: var(--box-shadow-card);
+        }
+    
+        .category {
+          background-color: white;
+          padding: 0.4rem 0.5rem;
+          border-radius: 0.5rem;
+          width: fit-content;
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin: 1rem;
+          box-shadow: var(--box-shadow-card);
+        }
+    
+        .date {
+          background-color: white;
+          padding: 0.4rem 0.5rem;
+          border-radius: 0.5rem;
+          width: fit-content;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin: 1rem;
+          box-shadow: var(--box-shadow);
+        }
+
+
+    }
+
+    .cardbottom{
+        display: flex;
+        align-items: center;
+
+        p {
+            background-color: var(--background);
+
+            border-radius: 50%;
+            margin: 0.5rem;
+            display: flex;
+            padding: 1.3rem;
+            align-items: center;
+            //box-shadow: var(--box-shadow);
+
+
+
+            svg{
+                height: 1.4rem;
+                width: 1.4rem;
+                transition: transform 0.3s ease;
+
+            }
+
+        }
+    }
+
   }
-
-
-}
-.blog-preview ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-}
-.blog-preview li {
-  width: 32%;
-  background-color: #D6D6D6;
-  //clip-path: url(#svgPath);
-}
-.blog-preview a {
-  text-decoration: none;
-  color: inherit;
-}
-.blog-preview h3 {
-    margin: 0.5rem 0 0;
-    background-color: #fff;
-}
-.blog-preview .date {
-  font-size: 0.9rem;
-  color: rgb(var(--gray));
-}
-.more-link {
-  margin-top: 1.5rem;
-  text-align: right;
-}
-@media (max-width: 720px) {
+  .blog-preview ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
   .blog-preview li {
-    width: 100%;
+    width: 32%;
+    background-color: #d6d6d6;
+    box-shadow: var(--box-shadow-card);
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+
+
+    &:hover {
+        transform: scale(1.05);
+
+        svg {
+            transform: translateX(4px); // Pfeil bewegt sich leicht nach rechts
+        }
   }
-}
+
+    //clip-path: url(#svgPath);
+  }
+  .blog-preview a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .blog-preview h3 {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    width: 100%;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .more-link {
+    margin: 2rem 0 1rem 0;    
+    text-align: right;
+    display: block;
+    font-weight: 600;
+  }
+  @media (max-width: 720px) {
+    .blog-preview li {
+      width: 100%;
+    }
+  }
 </style>
