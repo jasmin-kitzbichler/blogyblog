@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import { Image } from "astro:assets";
 import { getLocalizedPosts } from "../getLocalizedPosts";
+import { categoryMap } from "../categoryMap";
 
 // 1. Lade alle Blogposts
 const allPosts = await getCollection("blog");
@@ -68,7 +69,7 @@ const getLangEmoji = (lang: string): string => {
                 )}
                 <p class="lang">{getLangEmoji(post.data.lang)}</p>
                 {post.data.category && (
-                  <p class="category">{post.data.category}</p>
+                  <p class="category">{categoryMap[post.data.category]?.emoji}</p>
                 )}
                 <p class="date">
                   <FormattedDate date={post.data.pubDate} />

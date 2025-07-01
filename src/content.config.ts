@@ -1,15 +1,17 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
+import { categoryMap } from './categoryMap';
+
+const categoryEnum = z.enum(
+  Object.keys(categoryMap) as [keyof typeof categoryMap, ...Array<keyof typeof categoryMap>]
+);
 
 const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
-		category: z.string().optional(),
-		// Transform string to Date object
+		category: categoryEnum.optional(), // <- hier validiert
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: image().optional(),
@@ -19,17 +21,14 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-	// Load Markdown and MDX files in the `src/content/projects/` directory.
 	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
-		// Transform string to Date object
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		image: image().optional(),
 	}),
 });
 
-export const collections = { blog , projects };
+export const collections = { blog, projects };
