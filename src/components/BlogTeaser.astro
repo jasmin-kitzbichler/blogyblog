@@ -32,31 +32,12 @@ const getLangEmoji = (lang: string): string => {
 };
 ---
 
-<svg height="0" width="0">
-  <defs>
-    <clipPath id="svgPath">
-      <path
-        fill="#FFFFFF"
-        stroke="#000000"
-        stroke-width="1.5794"
-        stroke-miterlimit="10"
-        d="M330 0C338.837 0 346 7.16344 346 16V240H345.863C344.348 223.181 330.214 210 313 210C295.786 210 281.652 223.181 280.137 240H280V256C280 267.046 271.046 276 260 276H16C7.16344 276 1.61075e-07 268.837 0 260V16C0 7.16344 7.16344 0 16 0H330Z"
-      ></path>
-    </clipPath>
-  </defs>
-</svg>
 
 <section class="blog-preview">
   <div class="width-container">
     <span class="devider"></span>
     <div class="section-heading">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-          ><path
-            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-          ></path></svg
-        ><span class="text"> Neues im Blog</span>
-      </h2>
+      <h2>Neues im Blog</h2>
     </div>
     <ul>
       {
@@ -77,9 +58,7 @@ const getLangEmoji = (lang: string): string => {
               </div>
             <div class="cardbottom">
                 <h3>{post.data.title}</h3>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
-                </p>
+                <p>{post.data.description}</p>
             </div>
             </a>
           </li>
@@ -113,12 +92,18 @@ const getLangEmoji = (lang: string): string => {
 
         position: relative;
         font-family: 'Inter', sans-serif;
-        margin: 0.5rem 0.5rem 0 0.5rem;
+
+        img{
+          max-width: 100%;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 16px 16px 0 0;
+        }
 
 
         .lang {
           background-color: white;
-          padding: 0.4rem 0.5rem;
+          padding: 0.4rem 0.7rem;
           border-radius: 0.5rem;
           width: fit-content;
           position: absolute;
@@ -130,7 +115,7 @@ const getLangEmoji = (lang: string): string => {
     
         .category {
           background-color: white;
-          padding: 0.4rem 0.5rem;
+          padding: 0.4rem 0.7rem;
           border-radius: 0.5rem;
           width: fit-content;
           position: absolute;
@@ -156,29 +141,23 @@ const getLangEmoji = (lang: string): string => {
     }
 
     .cardbottom{
-        display: flex;
-        align-items: center;
+      p {
+        text-align: center;
+        margin: 0.5rem 1rem;
+      }
 
-        p {
-            background-color: var(--background);
+      h3 {
+        border-top: 0.15rem solid #fff;
+        border-bottom: 0.15rem solid #fff;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-align: center;
+  }
 
-            border-radius: 50%;
-            margin: 0.5rem;
-            display: flex;
-            padding: 1.3rem;
-            align-items: center;
-            //box-shadow: var(--box-shadow);
 
-
-
-            svg{
-                height: 1.4rem;
-                width: 1.4rem;
-                transition: transform 0.3s ease;
-
-            }
-
-        }
     }
 
   }
@@ -189,11 +168,12 @@ const getLangEmoji = (lang: string): string => {
     justify-content: space-between;
   }
   .blog-preview li {
-    width: 32%;
-    background-color: #d6d6d6;
-    box-shadow: var(--box-shadow-card);
-    border-radius: 0.5rem;
+    width: 31%;
+    border-radius: 16px;
     transition: transform 0.3s ease;
+    border: 0.2rem solid #fff;
+    box-shadow: var(--box-shadow-card);
+
 
 
     &:hover {
@@ -210,19 +190,7 @@ const getLangEmoji = (lang: string): string => {
     text-decoration: none;
     color: inherit;
   }
-  .blog-preview h3 {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
-    font-size: 1.3rem;
-    width: 100%;
-    min-height: 3rem;
-    display: flex;
-    align-items: center;
-  }
+
 
   .more-link {
     margin: 2rem 0 1rem 0;    

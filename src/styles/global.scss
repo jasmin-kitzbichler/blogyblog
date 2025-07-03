@@ -122,26 +122,28 @@
 
   .section-heading{
 	display: inline-block;
-	background-color: #fff;
+	position: relative;
 	width: 15rem;
 	border-radius: 0.5rem;
-	margin: 1rem 0;
-	box-shadow: var(--box-shadow-card);
+	margin: 1rem 1rem;
 
 	h2 {
 
-		svg {
-			height: 1rem;
-			margin: 0 1rem;
-		}
-		.text{
-			box-shadow: 0 30px 40px rgba(0,0,0,.2);
-			width: fit-content;
-		}
 		font-size: 1.2rem;
 		font-family: Inter, serif;
 		font-weight: 600;
-		margin: 0.8rem 0;
+		margin: 1rem 0rem;
+		z-index: 2;
+		position: relative;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: url("/src/assets/search-doodle3.svg") no-repeat center / contain;
+		z-index: 1;
+		transform: scale(1.2);
 	}
   }
   

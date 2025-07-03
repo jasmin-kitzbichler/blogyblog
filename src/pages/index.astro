@@ -26,7 +26,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 							</div>
 							<div class="hero-photo">
-								<img src="/src/assets/hero-image2.png" alt="Hero portrait" class="hero-main-img" />
+								<img src="/src/assets/hero-image-doodle.png" alt="Hero portrait" class="hero-main-img" />
 							</div>
 						</div>
 						
@@ -88,6 +88,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   line-height: 0.8;
 }
 
+@supports (-webkit-text-stroke: 0.15rem #000) {
+  .hero-left h1 {
+    -webkit-text-fill-color: #fff;
+    -webkit-text-stroke: 0.15rem #000;
+  }
+}
+
 .hero-left .location {
   background: var(--accent-dark);
   font-size: 1rem;
@@ -145,6 +152,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	z-index: 100;
 	height: 250px;
 	filter: grayscale(1);
+    border: 0.2rem solid #fff;
+
 
 	&:hover {
 		filter: grayscale(0);
