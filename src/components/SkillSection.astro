@@ -1,0 +1,224 @@
+---
+import { getCollection } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+import { Image } from "astro:assets";
+import { getLocalizedPosts } from "../getLocalizedPosts";
+import { categoryMap } from "../categoryMap";
+
+---
+
+
+<section class="skill-preview">
+  <div class="width-container">
+    <span class="devider"></span>
+    <div class="section-heading">
+      <h2>All the facts</h2>
+    </div>
+    <div class="skill-container">
+          <div class="card hardskill">
+                <h3>Hard Skills</h3>
+                <ul>
+                <li class="addinfo-big">🖥️ UX/UI Design <p>UX/UI Design:<br>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></li>
+                <li class="addinfo-big">🛠️ Umsetzung<p>Umsetzung:<br> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p></li>
+                <li>🚶‍♀️ Barrierefreiheit</li>
+                <li>🌐 Hosting & Domain</li>
+                <li>📱 Social Media</li>
+                <li>📸 Fotographie</li>
+                </ul>
+            </div>
+
+            <div class="card softskill">
+                <h3>Soft Skills</h3>
+                <ul>
+                <li>🧠 Analytisch & Lösungsorientiert</li>
+                <li>🛠️ Hands-on Mentalität</li>
+                <li>🎯 Verantwortungsbewusst & verlässlich</li>
+                <li>💬 Kommunikativ & teamfähig</li>
+                <li>💡 Interdisziplinär denkend</li>
+                <li>✍️ Reflektiert & authentisch</li>
+                </ul>
+            </div>
+
+            <div class="card education">
+                <h3>Ausbildung</h3>
+                <ul>
+                <li class="addinfo-small">🎓 FH Kufstein – BSc. Web Business & Technology <p>2017 – 2020</p></li>
+                <li class="addinfo-small">🏛️ FernUni Hagen – Politikwissenschaft <p>seit 2022</p></li>
+                </ul>
+            </div>
+
+            <div class="card jobs">
+                <h3>Berufserfahrung</h3>
+                <ul>
+                <li class="addinfo-small">💼 Praktikum – Kufgem <p>05–07/2020</p></li>
+                <li class="addinfo-small">💻 Web Developer – Kufgem <p>2020–2021</p></li>
+                <li class="addinfo-small">🎯 Heeressportlerin <p>seit 2021</p></li>
+                </ul>
+            </div>
+
+            <div class="card langs">
+                <h3>Sprachen</h3>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="font-size: 2rem;">🇩🇪</span>
+                <span style="font-size: 2rem;">🇬🇧</span>
+                <span style="font-size: 2rem;">🇮🇹</span>
+                <span style="font-size: 2rem;">🇫🇷</span>
+                </div>
+            </div>
+
+            <div class="card contactme">
+                <h3>Kontakt</h3>
+                <p><a href="#kontakt">Kontakt Link</a></p>
+            </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+
+    .skill-preview {
+        margin-top: 0;
+        padding-bottom: 3rem;
+        padding-top: 2rem;
+        background-color: var(--gray-light);
+        border-radius: 2rem 2rem 0 0;
+        box-shadow: var(--box-shadow-section);
+
+
+        .devider {
+        display: block;
+        border-top: 0.2rem solid (var(--accent));
+        width: 100%;
+        height: 1px;
+        }
+
+        .skill-container{
+            display: grid;
+            grid-template-columns: repeat(3, 2fr);
+            //grid-template-rows: repeat(3, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+
+            .card{
+                border: 0.2rem solid (var(--accent));
+                border-radius: 16px;
+                margin: 0.5rem;
+                position: relative;
+                
+                h3 {
+                    padding: 1rem 1rem 0 1rem;
+                    font-size: 1.2rem;
+                    font-family: 'Inter', sans-serif;
+                    font-weight: 600;
+                }
+
+                ul{
+                    margin: 0;
+                    padding: 0;
+                }
+
+                li {
+                    margin: 0.5rem;
+                    padding: 0.3rem 0.6rem;
+                    border: 0.2rem solid (var(--accent));
+                    border-radius: 16px;
+                    list-style-type: none;
+                    position: relative;
+
+                }
+
+                li.addinfo-small {
+
+
+                    p{
+                        display: none;
+                    }
+
+                    &:after{
+                        content:'';
+                        background-image: url(../assets/information.png);
+                        background-size: cover;
+                        margin: 0 0.5rem;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        position: absolute;
+                    }
+
+                    &:hover{
+                        p {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background-color: rgba(0, 0, 0, 0.7);
+                            border-radius: 16px;
+                            width: 100%;
+                            height: 100%;
+                            color:#fff;
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                        &:after{
+                            display: none;
+                        }
+                    }
+                }
+
+                li.addinfo-big {
+
+                    position: unset;
+
+
+                    p{
+                        display: none;
+                    }
+
+                    &:after{
+                        content:'';
+                        background-image: url(../assets/information.png);
+                        background-size: cover;
+                        margin: 0 0.5rem;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        position: absolute;
+                    }
+
+                    &:hover{
+                        p {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background-color: rgba(0, 0, 0, 0.7);
+                            border-radius: 16px;
+                            width: 100%;
+                            height: 100%;
+                            color:#fff;
+                            margin: 0;
+                            padding: 2rem;
+                            z-index: 10;
+                            box-sizing: border-box;
+                        }
+
+                        &:after{
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .hardskill { grid-area: 1 / 1 / 3 / 2; }
+            .softskill { grid-area: 2 / 2 / 4 / 3; }
+            .education { grid-area: 1 / 2 / 2 / 4; }
+            .jobs { grid-area: 2 / 3 / 3 / 4; }
+            .langs { grid-area: 3 / 1 / 4 / 2; }
+            .contactme { grid-area: 3 / 3 / 4 / 4; }
+        }
+}
+
+</style>

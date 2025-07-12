@@ -1,1 +1,111 @@
-<p>Kontakt</p>
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+---
+
+<html lang="de">
+  <head>
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}></BaseHead>
+</head>
+  <body>
+    <Header />
+    <section class="contact-section">
+        <h1>Kontaktformular</h1>
+        <p>Sag was du denkst, frag was du willst – das hier ist das kleine digitale Notizzettelchen direkt zu mir. - Einfach ausfüllen & abschicken!</p>
+        <form
+            action="https://submit-form.com/mlmLU1wyU"
+            method="POST"
+            class="contact-form"
+            >
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Dein Name" required />
+
+            <label for="email">E-Mail *</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="dein@email.at"
+                required
+            />
+
+            <label for="message">Nachricht *</label>
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Was möchtest du mir schreiben?"
+                required
+            ></textarea>
+
+            <button type="submit">Absenden</button>
+            </form>
+    </section>
+    <Footer/>
+  </body>
+</html>
+
+<style lang="scss">
+
+    .contact-section{
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+
+        h1{
+            text-align: center;
+            font-size: 2rem;
+            margin: 1em 0;
+        }
+        p{
+            text-align: center;
+        }
+    }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: "Inter", sans-serif;
+    margin: 0 auto;
+    padding: 2rem;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      align-self: flex-start;
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+      }
+    }
+  }
+</style>

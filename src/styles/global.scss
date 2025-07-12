@@ -211,6 +211,23 @@
 	  padding: 1.5em 1em;
 	}
   }
+
+  /* Image Grid Post*/
+
+  .post-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: var(--box-shadow-card);
+    object-fit: cover;
+  }
+}
   
   /* Accessibility helper */
   .sr-only {

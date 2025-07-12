@@ -29,6 +29,7 @@ const projects = (await getCollection('projects'))
               </div>
             <div class="cardbottom">
               <h3>{project.data.title}</h3>
+              <p>{project.data.description}</p>
             </div>
             </a>
           </li>
@@ -60,7 +61,13 @@ const projects = (await getCollection('projects'))
   .projectteaserImage {
     position: relative;
     font-family: 'Inter', sans-serif;
-    margin: 0.5rem 0.5rem 0 0.5rem;
+
+    img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px 16px 0 0;
+    }
 
     .date {
       background-color: white;
@@ -71,14 +78,29 @@ const projects = (await getCollection('projects'))
       bottom: 0;
       left: 0;
       margin: 1rem;
-      box-shadow: var(--box-shadow-card);
+      box-shadow: var(--box-shadow);
     }
 
 }
 
 .cardbottom {
-    display: flex;
-    align-items: center;
+
+
+    p {
+      text-align: center;
+      margin: 0.5rem 1rem;
+    }
+
+    h3 {
+      border-top: 0.15rem solid #fff;
+      border-bottom: 0.15rem solid #fff;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+    }
 }
 
 ul {
@@ -88,10 +110,11 @@ ul {
     justify-content: space-between;
 }
 li {
-    width: 32%;
+    width: 31%;
     background-color: #d6d6d6;
     box-shadow: var(--box-shadow-card);
-    border-radius: 0.5rem;
+    border: 0.2rem solid #fff;
+    border-radius: 16px;
     transition: transform 0.3s ease;
 
     &:hover {
@@ -102,24 +125,32 @@ a {
     text-decoration: none;
     color: inherit;
   }
-  h3 {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
-    font-size: 1.3rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
+
 
   .more-link {
     margin: 2rem 0 1rem 0;
     text-align: right;
     display: block;
     font-weight: 600;
+
+    a {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background-color: transparent;
+        transition: background-color 0.2s ease;
+      }
+
+      &:hover::after {
+        background-color: var(--linkunderline);
+      }
+    }
   }
 
   @media (max-width: 720px) {
