@@ -1,0 +1,79 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+---
+
+<html lang="de">
+  <head>
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}></BaseHead>
+</head>
+  <body>
+    <Header />
+    <main>
+
+        <section class="datenschutz-section">
+            <h1 class="subpage-heading">Datenschutzerklärung</h1>
+            <p>Der Schutz Ihrer persönlichen Daten ist mir ein besonderes Anliegen. Ich verarbeite Ihre Daten daher ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2003).</p>
+            
+            <h2>Kontakt mit mir</h2>
+            <p>Wenn Sie per Formular auf der Website oder per E-Mail Kontakt mit mir aufnehmen, werden Ihre angegebenen Daten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen sechs Monate gespeichert. Diese Daten gebe ich nicht ohne Ihre Einwilligung weiter.</p>
+            
+            <h2>Cookies</h2>
+            <p>Diese Website verwendet technisch notwendige Cookies zur Gewährleistung der Funktionalität. Darüber hinaus werden – nur mit Ihrer Zustimmung – Cookies für Analysezwecke gesetzt (siehe unten: Google Analytics).</p>
+            
+            <h2>Server-Logs</h2>
+            <p>Der Hosting-Provider dieser Website erhebt und speichert automatisch Informationen in so genannten Server-Logfiles, die Ihr Browser automatisch übermittelt. Dies umfasst unter anderem:</p>
+            <ul>
+                <li>Browsertyp und -version</li>
+                <li>verwendetes Betriebssystem</li>
+                <li>Referrer-URL</li>
+                <li>Hostname des zugreifenden Rechners</li>
+                <li>Uhrzeit der Serveranfrage</li>
+                <li>IP-Adresse (anonymisiert)</li>
+            </ul>
+            
+            <h2>Google Analytics</h2>
+            <p>Diese Website verwendet Google Analytics, einen Webanalysedienst der Google Ireland Limited („Google“), Gordon House, Barrow Street, Dublin 4, Irland. Die Nutzung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.</p>
+            
+            <p>Google Analytics verwendet Cookies, die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Die IP-Adresse wird jedoch vor der Übertragung anonymisiert („IP-Anonymisierung“). Dadurch ist keine direkte Zuordnung zu Ihrer Person möglich.</p>
+            
+            <p>Google wird diese Informationen verwenden, um Ihre Nutzung der Website auszuwerten, Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen zu erbringen.</p>
+            
+            <p>Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern. Darüber hinaus können Sie Ihre Einwilligung jederzeit über den Cookie-Banner widerrufen oder über folgendes Browser-Plugin deaktivieren:</p>
+            
+            <p><a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a></p>
+            
+            <p>Weitere Informationen zur Datenverarbeitung durch Google finden Sie unter:  
+                <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+                
+                <h2>Ihre Rechte</h2>
+                <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der Datenschutzbehörde beschweren.</p>
+                
+                <h2>Kontakt</h2>
+                <p>Bei Fragen erreichen Sie mich unter:<br>
+                    <strong>E-Mail:</strong> <a href="mailto:jasmin.kitzbichler@gmail.com">jasmin.kitzbichler@gmail.com</a></p>
+                </main>
+            </section>
+        </main>
+        <Footer/>
+  </body>
+</html>
+
+<style lang="scss">
+
+    .datenschutz-section{
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+
+
+        p, h2, li{
+            text-align: center;
+            display: block;
+        }
+    }
+</style>

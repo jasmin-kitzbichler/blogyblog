@@ -14,7 +14,7 @@ import { Image } from 'astro:assets';
   <body>
     <Header />
     <section class="contact-section">
-        <h1>Kontaktformular</h1>
+        <h1 class="subpage-heading">Kontaktformular</h1>
         <p>Sag was du denkst, frag was du willst – das hier ist das kleine digitale Notizzettelchen direkt zu mir. - Einfach ausfüllen & abschicken!</p>
         <form
             action="https://submit-form.com/mlmLU1wyU"
@@ -54,12 +54,9 @@ import { Image } from 'astro:assets';
         width: 720px;
         max-width: calc(100% - 2em);
         margin: auto;
+        padding-bottom: 2rem;
 
-        h1{
-            text-align: center;
-            font-size: 2rem;
-            margin: 1em 0;
-        }
+
         p{
             text-align: center;
         }
@@ -81,7 +78,8 @@ import { Image } from 'astro:assets';
     textarea {
       padding: 0.75rem;
       border-radius: 0.5rem;
-      border: 1px solid #ccc;
+      background-color: transparent;
+      border: 0.2rem solid #fff;
       font-size: 1rem;
       width: 100%;
       box-sizing: border-box;

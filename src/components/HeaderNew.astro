@@ -2,6 +2,8 @@
 import HeaderLink from './HeaderLink.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { SITE_TITLE } from '../consts';
+import { Astronav, MenuItems, MenuIcon, Dropdown, DropdownItems, DropdownSubmenu } from "astro-navbar";
+
 
 const currentPath = Astro.url.pathname;
 const isEnglish = currentPath.startsWith('/en');
@@ -12,7 +14,7 @@ import navEn from '../i18n/nav/en.ts';
 const nav = isEnglish ? navEn : navDe;
 const langPrefix = isEnglish ? '/en' : '';
 ---
-<header>
+<header  class="">
   <div class="top-bar">
     <!-- Site title / logo -->
     <div class="site-title">
@@ -25,9 +27,46 @@ const langPrefix = isEnglish ? '/en' : '';
 	</div>
 	
 	</div>
+  <div class="mobilemenu">
+    <Astronav closeOnClick >
+    <div class="">
+
+      <div class="">
+         <div class="">
+            <MenuIcon class="menubutton" />
+         </div>
+      </div>
+      <MenuItems class="hidden">
+         <ul class="">
+            <li>
+		        <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
+            </li>
+            <li>
+		      <HeaderLink href={`${langPrefix}/about`}>{nav.about}</HeaderLink>
+            </li>
+            <li>
+		      <HeaderLink href={`${langPrefix}/services`}>{nav.services}</HeaderLink>
+            </li>
+            <li>
+		        <HeaderLink href={`${langPrefix}/blog`}>{nav.blog}</HeaderLink>
+            </li>
+            <li>
+		        <HeaderLink href={`${langPrefix}/projects`}>{nav.projects}</HeaderLink>
+            </li>
+            <li>
+		      <HeaderLink href={`${langPrefix}/gallery`}>{nav.gallery}</HeaderLink>
+            </li>
+            <li>
+		  <HeaderLink href={`${langPrefix}/contact`}>{nav.contact}</HeaderLink>
+
+         </ul>
+      </MenuItems>
+   </Astronav>
+
+  </div>
 
 
-	<div>
+	<div class="mainnavcontainer">
 		<!-- Main nav -->  
 		<nav class="main-nav">
 		  <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
@@ -47,6 +86,19 @@ const langPrefix = isEnglish ? '/en' : '';
 header {
   background: var(--background);
   padding: 1.5rem 1rem 0;
+}
+
+
+.mobilemenu{
+  display: none;
+
+  .menubutton{
+    width: 100%;
+  }
+
+  #astronav-menu{
+    background-color: red;
+  }
 }
 
 .top-bar {
@@ -122,27 +174,13 @@ header {
 }
 
 /* Responsive layout */
-@media (max-width: 768px) {
-  .burger {
+@media (max-width: 900px) {
+  .mobilemenu{
     display: block;
   }
 
-  .main-nav {
-    flex-direction: column;
-    align-items: center;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .nav-toggle:checked + .burger + .language + .main-nav {
-    max-height: 500px;
-    padding-bottom: 1rem;
-  }
-
-  .top-bar {
-    flex-direction: row;
-    justify-content: space-between;
+  .mainnavcontainer{
+    display: none;
   }
 }
 

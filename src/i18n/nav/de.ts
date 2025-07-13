@@ -1,7 +1,7 @@
 export default {
     home: "Startseite",
     about: "Über mich",
-    profile: "Profil",
+    services: "Leistungen",
     blog: "Blog",
     projects: "Projekte",
     gallery: "Schnappschüsse",

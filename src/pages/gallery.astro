@@ -37,7 +37,6 @@ images = shuffle(images);
               widths={[400, 600, 800]}
               sizes="(max-width: 720px) 100vw, 33vw"
               loading="lazy"
-              style="margin-bottom: 1rem; border-radius: 12px; break-inside: avoid;"
             />
           ))
         }
@@ -61,11 +60,14 @@ images = shuffle(images);
 .gallery-columns img {
   width: 100%;
   transition: transform 0.3s ease;
+  border: 0.2rem solid #fff;
+  border-radius: 16px;
+  margin-bottom: 1rem;
 }
 
 .gallery-columns img:hover {
   transform: scale(1.02);
-  box-shadow: var(--box-shadow);
+  //box-shadow: var(--box-shadow);
 }
 
 @media (max-width: 900px) {

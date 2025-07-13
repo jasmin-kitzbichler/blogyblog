@@ -1,3 +1,4 @@
+
 :root {
 	--accent: #fff;
 	--linkunderline: #fff;
@@ -11,7 +12,9 @@
 	--box-shadow-card:
 	  5px 7px 15px 0 rgba(var(--gray), 0.25);
 	--box-shadow-section:
-	  0 -5px 15px 0 rgba(var(--gray), 0.25);
+	  0 -15px 15px 0 rgba(var(--gray), 0.1);
+	  	--box-shadow-cardbottom:
+	  0px -15px 15px 0 rgba(var(--gray), 0.3);
 
   }
   
@@ -78,9 +81,14 @@
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	text-align: left;
+
+  }
+
+  main{
+	padding-bottom: 2rem;
   }
   
-  main {
+  main, footer {
 
 	section .width-container{
 		width: 80%;
@@ -100,6 +108,26 @@
   h3 { font-size: 1.953em; }
   h4 { font-size: 1.563em; }
   h5 { font-size: 1.25em; }
+
+  .subpage-heading{
+	font-size: 3.2rem;
+	font-weight: 800;
+	margin: 1rem auto;
+	padding: 0.5rem 0;
+	text-align: center;
+	//border-bottom: 0.2rem solid var(--accent);
+	width: fit-content;
+		
+
+	@supports (-webkit-text-stroke: 0.1rem #000) {
+		-webkit-text-fill-color: #fff;
+		-webkit-text-stroke: 0.1rem #000;
+	}
+  }
+
+  .subpage-desc{
+	text-align: center;
+  }
   
   strong, b {
 	font-weight: 700;
@@ -120,6 +148,9 @@
 	margin-bottom: 2em;
   }
 
+  .hidden {
+  display: none;
+}
   .section-heading{
 	display: inline-block;
 	position: relative;

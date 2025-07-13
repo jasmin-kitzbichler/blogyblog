@@ -1,7 +1,7 @@
 export default {
   home: "Home",
   about: "About",
-  profile: "Profile",
+  services: "Services",
   blog: "Blog",
   projects: "Projects",
   gallery: "Gallery",

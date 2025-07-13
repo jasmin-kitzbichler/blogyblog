@@ -77,13 +77,22 @@ const projects = (await getCollection('projects'))
       position: absolute;
       bottom: 0;
       left: 0;
-      margin: 1rem;
+      margin: 1.5rem 1rem;
       box-shadow: var(--box-shadow);
     }
 
 }
 
 .cardbottom {
+
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      margin-top: -1rem;
+      position: relative;
+      z-index: 10;
+      background-color: var(--gray-light);
+      padding: 1rem 0;
+      box-shadow: var(--box-shadow-cardbottom);
 
 
     p {
