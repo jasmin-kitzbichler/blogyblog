@@ -163,17 +163,54 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	}
 }
 
-@media (max-width: 720px) {
+/* Responsive layout */
+@media (max-width: 900px) {
+
   .hero-layout {
-    flex-direction: column;
+	display: block;
+	.hero-left{
+		display: flex;
+		flex-direction: column;
+		height: unset;
+
+
+		.hero-photo{
+			position: relative;
+			order: 1;
+		}
+
+		.hero-text{
+			order: 2;
+			background-color: #fff;
+			border-radius: 0.4rem;
+			width: 100%;
+			margin-top: -4rem;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.hero-right{
+		text-align: center;
+		z-index: 10;
+		background-color: #fff;
+		border-radius: 0.4rem;
+		margin-bottom: 1rem;
+	}
   }
 
   .hero-text h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+  }
+
+  .hero-trio{
+	flex-wrap: nowrap;
   }
 
   .hero-trio img {
-    width: 100%;
+    //xwidth: 100%;
     height: auto;
   }
 }

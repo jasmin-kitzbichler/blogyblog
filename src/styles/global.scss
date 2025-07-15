@@ -234,13 +234,8 @@
   }
   
   @media (max-width: 720px) {
-	body {
-	  font-size: 18px;
-	}
+
   
-	main {
-	  padding: 1.5em 1em;
-	}
   }
 
   /* Image Grid Post*/
@@ -273,4 +268,11 @@
 	clip-path: inset(50%);
 	white-space: nowrap;
   }
+
+  @media (max-width: 900px) {
+	.width-container {
+		width: 87% !important;
+	}
+
+}
   

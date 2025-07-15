@@ -2,7 +2,6 @@
 import HeaderLink from './HeaderLink.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { SITE_TITLE } from '../consts';
-import { Astronav, MenuItems, MenuIcon, Dropdown, DropdownItems, DropdownSubmenu } from "astro-navbar";
 
 
 const currentPath = Astro.url.pathname;
@@ -21,53 +20,21 @@ const langPrefix = isEnglish ? '/en' : '';
       <a href={`${langPrefix}/`}>{SITE_TITLE}</a>
     </div>
 
-    
-	<div class="language">
+  	<div class="language">
 	  <LanguageSwitcher />
 	</div>
 	
 	</div>
-  <div class="mobilemenu">
-    <Astronav closeOnClick >
-    <div class="">
 
-      <div class="">
-         <div class="">
-            <MenuIcon class="menubutton" />
-         </div>
-      </div>
-      <MenuItems class="hidden">
-         <ul class="">
-            <li>
-		        <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
-            </li>
-            <li>
-		      <HeaderLink href={`${langPrefix}/about`}>{nav.about}</HeaderLink>
-            </li>
-            <li>
-		      <HeaderLink href={`${langPrefix}/services`}>{nav.services}</HeaderLink>
-            </li>
-            <li>
-		        <HeaderLink href={`${langPrefix}/blog`}>{nav.blog}</HeaderLink>
-            </li>
-            <li>
-		        <HeaderLink href={`${langPrefix}/projects`}>{nav.projects}</HeaderLink>
-            </li>
-            <li>
-		      <HeaderLink href={`${langPrefix}/gallery`}>{nav.gallery}</HeaderLink>
-            </li>
-            <li>
-		  <HeaderLink href={`${langPrefix}/contact`}>{nav.contact}</HeaderLink>
+    
 
-         </ul>
-      </MenuItems>
-   </Astronav>
-
-  </div>
 
 
 	<div class="mainnavcontainer">
-		<!-- Main nav -->  
+    <!-- Hamburger icon -->
+        <input class="side-menu" type="checkbox" id="side-menu"/>
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+    <!-- Main nav -->  
 		<nav class="main-nav">
 		  <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
 		  <HeaderLink href={`${langPrefix}/about`}>{nav.about}</HeaderLink>
@@ -85,31 +52,18 @@ const langPrefix = isEnglish ? '/en' : '';
 <style lang="scss">
 header {
   background: var(--background);
-  padding: 1.5rem 1rem 0;
+  //padding: 1.5rem 1rem 0;
 }
 
-
-.mobilemenu{
-  display: none;
-
-  .menubutton{
-    width: 100%;
-  }
-
-  #astronav-menu{
-    background-color: red;
-  }
-}
 
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: 1rem auto 0 auto;
+  padding: 0.5rem 1rem;
   color: #fff;
   width: 80%;
-  margin: auto;
   border-bottom: 0.2rem solid (var(--accent));
   
   a {
@@ -125,6 +79,10 @@ header {
   color: rgb(var(--black));
 }
 
+      .side-menu {
+        display: none;
+      } /* Hide checkbox */
+
 .main-nav {
   display: flex;
   justify-content: center;
@@ -136,6 +94,8 @@ header {
   flex-wrap: wrap;
   width: max-content;
   margin: auto;
+
+  
 }
 
 .main-nav a {
@@ -175,12 +135,125 @@ header {
 
 /* Responsive layout */
 @media (max-width: 900px) {
-  .mobilemenu{
-    display: block;
+
+  .top-bar{
+    //border-bottom: 0;
   }
 
   .mainnavcontainer{
-    display: none;
+
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    width: 80%;
+    margin: 0.5rem auto;
+    padding: 0 1rem;
+    border-radius: 0.4rem;
+
+        /* Menu Icon */
+      .hamb{
+        
+        cursor: pointer;
+        //position: absolute;
+        padding: 1.5rem;
+        //width: 100%;
+      }/* Style label tag */
+      
+      .hamb-line {
+        background: #000;
+        display: block;
+        height: 2px;
+        position: relative;
+        width: 24px;
+      
+      } /* Style span tag */
+      
+      .hamb-line::before,
+      .hamb-line::after{
+        background: #000;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+        z-index: 1001;
+      }
+      .hamb-line::before{
+        top: 5px;
+      }
+      .hamb-line::after{
+        top: -5px;
+      }
+      
+      .side-menu {
+        display: none;
+      } /* Hide checkbox */
+
+      /* Toggle menu icon */
+      .side-menu:checked ~ nav{
+          padding-top: 4rem;
+          max-height: 100%;
+          background-color: var(--gray-light);
+          gap:1rem;
+          box-shadow: var(--box-shadow-card);
+          border-radius: 0 0 0.4rem 0.4rem;
+
+      }
+      .side-menu:checked ~ .hamb .hamb-line {
+          background: transparent;
+      }
+      .side-menu:checked ~ .hamb .hamb-line::before {
+          transform: rotate(-45deg);
+          top:0;
+      }
+      .side-menu:checked ~ .hamb .hamb-line::after {
+          transform: rotate(45deg);
+          top:0;
+      }
+
+      .side-menu:checked ~ .hamb {
+        margin: -4.5rem;
+        position: fixed;
+        z-index: 1;
+
+
+      }
+
+      body:has(.side-menu:checked) {
+        overflow: hidden;
+      }
+  }
+
+
+  .main-nav{
+    max-height: 0;
+    //transition: max-height .01s ease-out;
+    width: 100%;
+    height: unset;
+    position: fixed;
+    //padding: 2rem;
+    top: 0;
+    left: 0;
+    //background-color: #fff;
+    overflow: hidden;
+    // flex-direction: column;
+    border-bottom: 0;
+
+    a{
+      width: 100%;
+      z-index: 100;
+      padding: 0 2rem ;
+      text-align: center;
+
+      &.active::after, &:hover::after{
+        background-color: transparent !important;
+      }
+    }
+
   }
 }
 
