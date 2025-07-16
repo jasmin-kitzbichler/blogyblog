@@ -1,0 +1,108 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Services | ${SITE_TITLE}`} description="How I can support you – my skills and services at a glance." />
+  </head>
+  <body>
+    <Header />
+    <main class="leistungen-page">
+      <section class="leistungen-intro">
+        <h1 class="subpage-heading">Services</h1>
+        <p class="subpage-desc">
+          Here’s an overview of how I can support you or your project – from the first idea to a finished digital presence.
+          Whether it’s about content, design, or strategic thinking: I bring not just skills, but also experience, passion,
+          and a sharp eye for detail.
+        </p>
+      </section>
+
+      <section class="leistungen-list">
+        <ul>
+          <li>
+            <h2>🧠 Concept & Strategy</h2>
+            <p>I like to think projects backwards – with audience, purpose, and style in mind. I’ll help you bring structure to your ideas, find pragmatic solutions, and develop creative content that works.</p>
+          </li>
+          <li>
+            <h2>🖥️ UX/UI Design</h2>
+            <p>User-centered design for websites, portfolios, or small web apps – always focused on clarity, recognition, and technical feasibility. I love well-thought-out systems that also make visual sense.</p>
+          </li>
+          <li>
+            <h2>🛠️ Technical Implementation</h2>
+            <p>I build modern websites using Astro, HTML, CSS, and some JavaScript. My priorities are performance, accessibility, and maintainability – whether it’s a portfolio, club website, or something in between. Markdown and CMS integration? Absolutely.</p>
+          </li>
+          <li>
+            <h2>📱 Content Creation</h2>
+            <p>Whether it’s Instagram Reels, event photography, or value-driven captions – I create content with heart, style, and a deep understanding of the target audience. My strengths lie especially in the world of sports, shooting, and club communication.</p>
+          </li>
+          <li>
+            <h2>🏆 Expertise from Competitive Sports</h2>
+            <p>As an active sports shooter with national and international competition experience, I understand the dynamics of training processes, goal setting, and mental strength. I know what athletes need – and what it takes to deliver consistent performance.</p>
+            <p><strong>🎯 ISSF D-Trainer Course:</strong> I'm currently completing the official ISSF coaching certification, focusing on technique instruction, training planning, analysis, and pedagogical competence in shooting sports.</p>
+          </li>
+          <li>
+            <h2>🎓 Academic Background</h2>
+            <p>I'm currently studying Political Science at FernUni Hagen, focusing on governance, power structures, and state development. My approach is analytical, interdisciplinary, and practice-oriented – especially at the intersection of societal change, technology, and organizations.</p>
+            <p>Before that, I completed my Bachelor of Science in Computer Science at FH Kufstein. The study program <em>Web Business & Technology</em> gave me a solid foundation in software development, web technologies, and digital strategy – a perfect complement to my creative work and political interests.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+
+<style lang="scss">
+.leistungen-page {
+  width: 80%;
+  max-width: 1600px;
+  margin: auto;
+  padding-bottom: 4rem;
+
+  .leistungen-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .leistungen-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      background-color: var(--gray-light);
+      border: 3px solid #fff;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: var(--box-shadow-card);
+      transition: transform 0.3s ease;
+
+      h2 {
+        margin-top: 0;
+        font-size: 1.4rem;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+
+
+}
+</style>

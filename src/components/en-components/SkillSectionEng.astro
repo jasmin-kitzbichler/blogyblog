@@ -1,13 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
+import FormattedDate from "../FormattedDate.astro";
 import { Image } from "astro:assets";
-import { getLocalizedPosts } from "../getLocalizedPosts";
-import { categoryMap } from "../categoryMap";
+import { getLocalizedPosts } from "../../getLocalizedPosts";
+import { categoryMap } from "../../categoryMap";
 
 ---
-
-
 <section class="skill-preview">
   <div class="width-container">
     <span class="devider"></span>
@@ -15,64 +13,65 @@ import { categoryMap } from "../categoryMap";
       <h2>All the facts</h2>
     </div>
     <div class="skill-container">
-          <div class="card hardskill">
-                <h3>Hard Skills</h3>
-                <ul>
-                <li >🖥️ UX/UI Design</li>
-                <li >🛠️ Umsetzung</li>
-                <li>🚶‍♀️ Barrierefreiheit</li>
-                <li>🌐 Hosting & Domain</li>
-                <li>📱 Social Media</li>
-                <li>📸 Fotographie</li>
-                </ul>
-            </div>
+      <div class="card hardskill">
+        <h3>Hard Skills</h3>
+        <ul>
+          <li>🖥️ UX/UI Design</li>
+          <li>🛠️ Development</li>
+          <li>🚶‍♀️ Accessibility</li>
+          <li>🌐 Hosting & Domains</li>
+          <li>📱 Social Media</li>
+          <li>📸 Photography</li>
+        </ul>
+      </div>
 
-            <div class="card softskill">
-                <h3>Soft Skills</h3>
-                <ul>
-                <li>🧠 Analytisch & Lösungsorientiert</li>
-                <li>🛠️ Hands-on Mentalität</li>
-                <li>🎯 Verantwortungsbewusst & verlässlich</li>
-                <li>💬 Kommunikativ & teamfähig</li>
-                <li>💡 Interdisziplinär denkend</li>
-                <li>✍️ Reflektiert & authentisch</li>
-                </ul>
-            </div>
+      <div class="card softskill">
+        <h3>Soft Skills</h3>
+        <ul>
+          <li>🧠 Analytical & solution-oriented</li>
+          <li>🛠️ Hands-on mentality</li>
+          <li>🎯 Responsible & reliable</li>
+          <li>💬 Communicative & team player</li>
+          <li>💡 Interdisciplinary mindset</li>
+          <li>✍️ Reflective & authentic</li>
+        </ul>
+      </div>
 
-            <div class="card education">
-                <h3>Ausbildung</h3>
-                <ul>
-                <li class="addinfo-small">🎓 FH Kufstein – BSc. Web Business & Technology <p>2017 – 2020</p></li>
-                <li class="addinfo-small">🏛️ FernUni Hagen – Politikwissenschaft <p>seit 2022</p></li>
-                </ul>
-            </div>
+      <div class="card education">
+        <h3>Education</h3>
+        <ul>
+          <li class="addinfo-small">🎓 FH Kufstein – BSc. Web Business & Technology <p>2017 – 2020</p></li>
+          <li class="addinfo-small">🏛️ FernUni Hagen – Political Science <p>since 2022</p></li>
+        </ul>
+      </div>
 
-            <div class="card jobs">
-                <h3>Berufserfahrung</h3>
-                <ul>
-                <li class="addinfo-small">💼 Praktikum – Kufgem <p>05–07/2020</p></li>
-                <li class="addinfo-small">💻 Web Developer – Kufgem <p>2020–2021</p></li>
-                <li class="addinfo-small">🎯 Heeressportlerin <p>seit 2021</p></li>
-                </ul>
-            </div>
+      <div class="card jobs">
+        <h3>Work Experience</h3>
+        <ul>
+          <li class="addinfo-small">💼 Internship – Kufgem <p>05–07/2020</p></li>
+          <li class="addinfo-small">💻 Web Developer – Kufgem <p>2020–2021</p></li>
+          <li class="addinfo-small">🎯 Military athlete <p>since 2021</p></li>
+        </ul>
+      </div>
 
-            <div class="card langs">
-                <h3>Sprachen</h3>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                <span style="font-size: 2rem;">🇩🇪</span>
-                <span style="font-size: 2rem;">🇬🇧</span>
-                <span style="font-size: 2rem;">🇮🇹</span>
-                <span style="font-size: 2rem;">🇫🇷</span>
-                </div>
-            </div>
+      <div class="card langs">
+        <h3>Languages</h3>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="font-size: 2rem;">🇩🇪</span>
+          <span style="font-size: 2rem;">🇬🇧</span>
+          <span style="font-size: 2rem;">🇮🇹</span>
+          <span style="font-size: 2rem;">🇫🇷</span>
+        </div>
+      </div>
 
-            <div class="card contactme">
-                <h3>Kontakt</h3>
-                <p><a href="#kontakt">Kontakt Link</a></p>
-            </div>
+      <div class="card contactme">
+        <h3>Contact</h3>
+        <p><a href="#contact">Contact link</a></p>
+      </div>
     </div>
   </div>
 </section>
+
 
 <style lang="scss">
 

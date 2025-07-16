@@ -1,7 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
-import HeaderNew from '../components/HeaderNew.astro';
 import Footer from '../components/Footer.astro';
 import BlogTeaser from '../components/BlogTeaser.astro';
 import ProjectTeaser from '../components/ProjectTeaser.astro';
@@ -15,7 +14,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<HeaderNew />
+		<Header />
 		<main>
 			<section class="hero">
 				<div class="width-container">
@@ -213,5 +212,26 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     //xwidth: 100%;
     height: auto;
   }
+}
+
+
+//For big screens
+@media (min-width: 1800px) {
+    .hero-main-img {
+      width: auto;
+    }
+	
+	.hero-layout .hero-left {
+		height: 700px;
+	}
+	
+	.hero-trio img {
+		height: 350px;
+
+	}
+
+	.hero-trio .img-behind{
+		//z-index: 3 ;
+	}
 }
 </style>

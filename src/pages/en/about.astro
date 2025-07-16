@@ -1,0 +1,100 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title="About Me" description="A look behind the scenes – who I am, what I do, and what drives me." />
+  </head>
+  <body>
+    <Header />
+    <main class="about-section">
+      <section>
+        <h1 class="subpage-heading">About Me</h1>
+        <p class="subpage-desc">
+          Hi! I'm Jasmin – creative whirlwind, web nerd, competitive shooter, and mountain kid. <br />
+          I love diving into new projects, creating things that are both beautiful and functional,
+          and connecting with people who are passionate about what they do.
+        </p>
+
+        <p>
+          In my everyday life, very different worlds collide: <strong>digital design</strong> meets
+          <strong>competitive shooting</strong>, <strong>hiking</strong> meets <strong>content strategy</strong>,
+          <strong>political theory</strong> meets <strong>Instagram captions</strong>. And somehow, it all fits – at least for me.
+        </p>
+
+        <p>
+          I believe that good work can be fun. And that clarity, honesty, and humor
+          are often the best ways to make complex things understandable.
+        </p>
+
+        <p>
+          When I’m not tweaking lines of code or aligning layouts down to the pixel,
+          I’m probably at the shooting range, on a mountain, or out with my camera somewhere.
+        </p>
+
+        <div class="facts-grid">
+          <div><strong>📍 Hometown:</strong> Kufstein, Tyrol</div>
+          <div><strong>🧠 Studies:</strong> Political Science</div>
+		  <div><strong>🎓 Degree:</strong> BSc. Computer Science</div>
+          <div><strong>🎯 Disciplines:</strong> Air rifle, smallbore & bigbore</div>
+		  <div><strong>🏅 Biggest Achievement:</strong> 2nd place Air Rifle Mixed, World Cup Jakarta</div>
+          <div><strong>💬 Languages:</strong> German, English, Italian, French</div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+
+<style lang="scss">
+.about-section {
+  width: 80%;
+  max-width: 1600px;
+  margin: 0 auto;
+
+
+
+  .subpage-desc {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+	  border: 0.2rem solid #fff;
+	  border-radius: 16px;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    font-size: 0.95rem;
+
+    div {
+      background: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--box-shadow-card);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .about-section .facts-grid {
+    grid-template-columns: repeat(1,1fr);
+  }
+
+}
+</style>

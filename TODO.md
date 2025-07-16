@@ -1,0 +1,13 @@
+TODOs:
+- Cookie Banner
+- Footer überarbeiten (auch mobil!!!)
+- Blogeinträge erstellen
+- Projekt eintrag für Thierberg Social Media
+- Lustige Mdx Komponenten erstellen (Lyrics Komponente,...)
+- Skill Section: Kontakt Kastl überarbeiten
+- Barrierefreiheit checken
+- Logo einfügen
+- Hover Doodle Elemente
+- SEO Titel und Beschreibung vereinheitlichen
+- Alt Texte
+- Favicon

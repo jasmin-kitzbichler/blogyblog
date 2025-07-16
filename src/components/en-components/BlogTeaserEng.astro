@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
+import FormattedDate from "../FormattedDate.astro";
 import { Image } from "astro:assets";
-import { getLocalizedPosts } from "../getLocalizedPosts";
-import { categoryMap } from "../categoryMap";
+import { getLocalizedPosts } from "../../getLocalizedPosts";
+import { categoryMap } from "../../categoryMap";
 
 // 1. Lade alle Blogposts
 const allPosts = await getCollection("blog");
@@ -37,7 +37,7 @@ const getLangEmoji = (lang: string): string => {
   <div class="width-container">
     <span class="devider"></span>
     <div class="section-heading">
-      <h2>Neues im Blog</h2>
+      <h2>Newest Blog Posts</h2>
     </div>
     <ul>
       {
@@ -66,7 +66,7 @@ const getLangEmoji = (lang: string): string => {
       }
     </ul>
     <p class="more-link">
-      <a href="/blog">Alle Beiträge ansehen →</a>
+      <a href="en/blog">View all Blog Posts →</a>
     </p>
   </div>
 </section>

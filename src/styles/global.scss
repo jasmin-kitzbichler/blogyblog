@@ -93,6 +93,7 @@
 	section .width-container{
 		width: 80%;
 		margin: auto;
+		max-width: 1600px;
 	}
   }
   
@@ -110,7 +111,7 @@
   h5 { font-size: 1.25em; }
 
   .subpage-heading{
-	font-size: 3.2rem;
+	font-size: 3rem;
 	font-weight: 800;
 	margin: 1rem auto;
 	padding: 0.5rem 0;

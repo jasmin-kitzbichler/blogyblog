@@ -1,21 +1,233 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
-
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import BlogTeaserEng from '../../components/en-components/BlogTeaserEng.astro';
+import ProjectTeaserEng from '../../components/en-components/ProjectTeaserEng.astro';
+import SkillSectionEng from '../../components/en-components/SkillSectionEng.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <div class="width-container">
+          <div class="hero-layout">
+            <div class="hero-left">
+              <div class="hero-text">
+                <p class="intro">Hi, I'm</p>
+                <h1>Jasmin</h1>
+                <p class="location">📍 Kufstein, Austria</p>
+              </div>
+              <div class="hero-photo">
+                <img src="/src/assets/hero-image-doodle.png" alt="Hero portrait" class="hero-main-img" />
+              </div>
+            </div>
+
+            <div class="hero-right">
+              <p class="desc">Competitive shooter, digital tinkerer, and someone who hides a bit of personality in every line of code and every photo.</p>
+              <p>Welcome to my website — I hope you find something interesting! ☺️</p>
+            </div>
+          </div>
+
+          <div class="hero-trio">
+            <img class="img-behind" src="/src/assets/coding.JPG" alt="Air rifle Walther Itec" />
+            <img src="/src/assets/JK991694.jpg" alt="With a camera" />
+            <img src="/src/assets/IMG_3521.JPG" alt="Screen with code" />
+          </div>
+        </div>
+      </section>
+
+      <BlogTeaserEng />
+      <ProjectTeaserEng />
+      <SkillSectionEng />
+    </main>
+    <Footer />
+  </body>
 </html>
+
+<style lang="scss">
+.hero {
+  background: var(--background);
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.hero-left{
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 500px;
+
+}
+
+.hero-left .intro {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.hero-left h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 0.8;
+}
+
+@supports (-webkit-text-stroke: 0.15rem #000) {
+  .hero-left h1 {
+    -webkit-text-fill-color: #fff;
+    -webkit-text-stroke: 0.15rem #000;
+  }
+}
+
+.hero-left .location {
+  background: var(--accent-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.2em 0.8em;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  line-height: 2;
+}
+
+.hero-right {
+
+	text-align: end;
+
+	.desc {
+	  font-weight: 600;
+	  margin-bottom: 1rem;
+	  
+	}
+}
+
+.hero-photo {
+	position: absolute;
+	top: 0;
+	right: 0;
+	//transform: translate(80px, 0);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.hero-main-img {
+  width: 750px;
+  filter: grayscale(1);
+
+}
+
+.hero-trio {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .img-behind {
+	z-index: 1;
+  }
+}
+
+.hero-trio img {
+	width: 32%;
+	object-fit: cover;
+	border-radius: 16px;
+	box-shadow: var(--box-shadow-card);
+	position: relative;
+	z-index: 100;
+	height: 250px;
+	filter: grayscale(1);
+    border: 0.2rem solid #fff;
+
+
+	&:hover {
+		filter: grayscale(0);
+	}
+}
+
+/* Responsive layout */
+@media (max-width: 900px) {
+
+  .hero-layout {
+	display: block;
+	.hero-left{
+		display: flex;
+		flex-direction: column;
+		height: unset;
+
+
+		.hero-photo{
+			position: relative;
+			order: 1;
+		}
+
+		.hero-text{
+			order: 2;
+			background-color: #fff;
+			border-radius: 0.4rem;
+			width: 100%;
+			margin-top: -4rem;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.hero-right{
+		text-align: center;
+		z-index: 10;
+		background-color: #fff;
+		border-radius: 0.4rem;
+		margin-bottom: 1rem;
+	}
+  }
+
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+
+  .hero-trio{
+	flex-wrap: nowrap;
+  }
+
+  .hero-trio img {
+    //xwidth: 100%;
+    height: auto;
+  }
+}
+
+
+//For big screens
+@media (min-width: 1800px) {
+    .hero-main-img {
+      width: auto;
+    }
+	
+	.hero-layout .hero-left {
+		height: 700px;
+	}
+	
+	.hero-trio img {
+		height: 350px;
+
+	}
+
+	.hero-trio .img-behind{
+		//z-index: 3 ;
+	}
+}
+</style>

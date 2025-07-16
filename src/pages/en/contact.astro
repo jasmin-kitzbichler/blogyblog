@@ -1,0 +1,110 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <section class="contact-section">
+      <h1 class="subpage-heading">Contact Form</h1>
+      <p>Say what's on your mind or ask me anything – this is your little digital notepad straight to my inbox. Just fill it out & hit send!</p>
+      <form
+        action="https://submit-form.com/mlmLU1wyU"
+        method="POST"
+        class="contact-form"
+      >
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+        />
+
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="What would you like to tell me?"
+          required
+        ></textarea>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <Footer />
+  </body>
+</html>
+
+
+<style lang="scss">
+
+    .contact-section{
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding-bottom: 2rem;
+
+
+        p{
+            text-align: center;
+        }
+    }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: "Inter", sans-serif;
+    margin: 0 auto;
+    padding: 2rem;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background-color: transparent;
+      border: 0.2rem solid #fff;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      align-self: flex-start;
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+      }
+    }
+  }
+</style>

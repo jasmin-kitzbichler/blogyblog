@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import FormattedDate from './FormattedDate.astro';
+import FormattedDate from '../FormattedDate.astro';
 import { Image } from 'astro:assets';
 
 const projects = (await getCollection('projects'))
@@ -12,7 +12,7 @@ const projects = (await getCollection('projects'))
   <div class="width-container">
     <span class="devider"></span>
     <div class="section-heading">
-      <h2>Projekte</h2>
+      <h2>Projects</h2>
     </div>
     <ul>
       {
@@ -37,7 +37,7 @@ const projects = (await getCollection('projects'))
       }
     </ul>
     <p class="more-link">
-      <a href="/projects">Alle Projekte ansehen →</a>
+      <a href="/projects">View all Projects →</a>
     </p>
   </div>
 </section>

@@ -6,14 +6,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
+import { categoryMap } from "../../../categoryMap";
+
 
 import { getLocalizedPosts } from '../../../getLocalizedPosts';
 
 const allPosts = await getCollection('blog');
 const lang = 'en';
-const posts = getLocalizedPosts(allPosts, lang).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+
+
+
+const posts = getLocalizedPosts(allPosts, lang)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+
+const categories = Object.entries(categoryMap);
+
 
 const getLangEmoji = (lang: string): string => {
   switch (lang) {
@@ -31,102 +39,270 @@ const getLangEmoji = (lang: string): string => {
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<p>I'm the English Blog Page Bro</p>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
- 					              <p class="lang">{getLangEmoji(post.data.lang)}</p>
+  <section class="blog-overview-section">
+    <h1 class="subpage-heading">Blog Collection</h1>
+    <p class="subpage-desc">
+      Welcome to my little thought archive.<br />
+      Here you’ll find everything that moves, challenges, or inspires me – sometimes structured, sometimes beautifully messy.
+      Always authentic, honest, and without the pressure of perfection. Written with heart, brain, and a healthy dose of coffee.
+    </p>
 
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
+    <div class="category-filter">
+      <div class="blog-filter">
+        {
+          Object.entries(categoryMap).map(([key, value]) => (
+            <a
+              href="#"
+              class="filter-pill"
+              data-category={key}
+            >
+              <span>{value.emoji} {value.label[lang]}</span>
+            </a>
+          ))
+        }
+        <a href="#" class="filter-pill reset hidden">✖️ Show all</a>
+      </div>
+    </div>
+
+    <ul>
+      {
+        posts.map((post) => (
+          <li class="blog-post" data-category={post.data.category}>
+            <a href={`/blog/${post.id}/`}>
+              <div class="blog-image">
+                {post.data.heroImage && (
+                  <Image src={post.data.heroImage} alt="" />
+                )}
+              </div>
+              <div class="blog-details">
+                <p class="lang">{getLangEmoji(post.data.lang)}</p>
+                <div class="facts">
+                  <p class="date">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                  {post.data.category && (
+                    <p class="category">{categoryMap[post.data.category]?.emoji}</p>
+                  )}
+                </div>
+                <h4 class="title">{post.data.title}</h4>
+                <p class="desc">{post.data.description}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</main>
+
 		<Footer />
+
+		<script>
+			
+			document.addEventListener('DOMContentLoaded', () => {
+				const filterLinks = document.querySelectorAll('.filter-pill');
+				const posts = document.querySelectorAll('.blog-post');
+				const resetBtn = document.querySelector('.filter-pill.reset');
+
+				filterLinks.forEach(link => {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
+
+					const selectedCategory = link.getAttribute('data-category');
+					const isReset = link.classList.contains('reset');
+
+					filterLinks.forEach(l => l.classList.remove('active'));
+					if (!isReset) link.classList.add('active');
+
+					posts.forEach(post => {
+					const postCategory = post.getAttribute('data-category');
+					if (isReset || postCategory === selectedCategory) {
+						post.classList.remove('hidden');
+					} else {
+						post.classList.add('hidden');
+					}
+					});
+
+					// Button nur zeigen, wenn gefiltert wird
+					if (resetBtn instanceof HTMLElement) {
+
+					if (!isReset) {
+						resetBtn.classList.remove('hidden');
+					} else {
+						resetBtn.classList.add('hidden');
+					}
+				}
+				});
+				});
+			});
+</script>
+
+		
 	</body>
+
+	
+
 </html>
+
+<style lang="scss">
+
+	.blog-overview-section{
+        width: 80%;
+		max-width: 1600px;
+		margin: auto;
+
+		
+		
+		
+		ul, li{
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			
+			a{
+				color: #000;
+				text-decoration: none;
+			}
+		}
+		
+		li a{
+			display: flex;
+		}
+		
+		.blog-post.hidden {
+		display: none !important;
+		}
+		.blog-filter {
+			margin: 2rem 0;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+
+		.filter-pill {
+			border: 0.2rem solid var(--accent);
+			color: #000;
+			padding: 0.5rem 1rem;
+			border-radius: 999px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+			box-shadow: var(--box-shadow-card);
+			transition: background-color 0.2s ease;
+
+			&:hover {
+			background-color: var(--accent-dark, #333);
+			}
+
+			&.active {
+			background-color: var(--accent-dark, #333);
+			}
+
+			&.reset.hidden {
+			display: none;
+			}
+		}
+		}
+
+		li{
+			background-color: var(--gray-light);
+			border-radius: 16px;
+			transition: transform 0.3s ease;
+			border: 0.2rem solid #fff;
+			box-shadow: var(--box-shadow-card);
+			overflow: hidden;
+			margin: 1rem 0;
+		}
+
+		.blog-image{
+			width: 30%;
+			
+			img {
+				height: 200px;
+				object-fit: cover;
+
+			}
+		}
+
+		.blog-details{
+			position: relative;
+			width: 100%;
+			margin: 0 1rem;
+			padding: 1rem 0;
+			.facts{
+				display: flex;
+				margin: 0 0 1rem 0;
+
+			}
+			
+			.title  {
+				margin: 0;
+			}
+
+			.desc{
+				margin: 1rem 0 0 0;
+			}
+			.lang{
+				position: absolute;
+				top: 0;
+				right: 0;
+				background-color: var(--accent);
+				padding: 0.4rem 0.7rem;
+				border-radius: 0.5rem;
+				width: fit-content;
+				margin: 1rem 0;
+				box-shadow: var(--box-shadow-card);
+			}
+
+			.date {
+				background-color: var(--accent);
+				padding: 0.4rem 0.7rem;
+				border-radius: 0.5rem;
+				width: fit-content;
+				margin: 0;
+				box-shadow: var(--box-shadow-card);
+			}
+
+			.category {
+				background-color: var(--accent);
+				padding: 0.4rem 0.7rem;
+				border-radius: 0.5rem;
+				width: fit-content;
+				margin: 0 1rem;
+				box-shadow: var(--box-shadow-card);
+			}
+		}
+
+	}
+
+	@media (max-width: 900px) {
+
+	.blog-post a{
+		flex-direction: column;
+		text-align: center;
+
+		.blog-image{
+		width: 100%;
+		}
+
+		.blog-image img {
+		height: auto;
+		}
+
+		.blog-details{
+		width: auto;
+		.category{
+			margin: 0 3rem;
+		}
+		}
+
+	}
+
+}
+		
+			
+</style>

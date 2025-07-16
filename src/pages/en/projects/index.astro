@@ -1,10 +1,10 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
 const posts = (await getCollection('projects')).sort(
@@ -13,7 +13,7 @@ const posts = (await getCollection('projects')).sort(
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
@@ -21,9 +21,9 @@ const posts = (await getCollection('projects')).sort(
     <Header />
     <main>
       <section class="projects-overview-section">
-        <h1 class="subpage-heading">Projekte</h1>
+        <h1 class="subpage-heading">Projects</h1>
         <p class="subpage-desc">
-          Eine Auswahl an Projekten, an denen ich in den letzten Jahren gearbeitet habe – von persönlichen Spielwiesen bis hin zu ehrenamtlichen und professionellen Umsetzungen.
+          A selection of projects I've worked on over the past years – ranging from personal playgrounds to voluntary and professional implementations.
         </p>
         <ul>
           {
@@ -54,6 +54,7 @@ const posts = (await getCollection('projects')).sort(
     <Footer />
   </body>
 </html>
+
 
 <style lang="scss">
 .projects-overview-section {

@@ -148,8 +148,8 @@ const getLangEmoji = (lang: string): string => {
 
 	.blog-overview-section{
         width: 80%;
-        max-width: calc(100% - 2em);
-        margin: auto;
+		max-width: 1600px;
+		margin: auto;
 
 		
 		
@@ -232,8 +232,16 @@ const getLangEmoji = (lang: string): string => {
 			.facts{
 				display: flex;
 				margin: 0 0 1rem 0;
+
+			}
+			
+			.title  {
+				margin: 0;
 			}
 
+			.desc{
+				margin: 1rem 0 0 0;
+			}
 			.lang{
 				position: absolute;
 				top: 0;
@@ -266,6 +274,31 @@ const getLangEmoji = (lang: string): string => {
 		}
 
 	}
+
+	@media (max-width: 900px) {
+
+	.blog-post a{
+		flex-direction: column;
+		text-align: center;
+
+		.blog-image{
+		width: 100%;
+		}
+
+		.blog-image img {
+		height: auto;
+		}
+
+		.blog-details{
+		width: auto;
+		.category{
+			margin: 0 3rem;
+		}
+		}
+
+	}
+
+}
 		
 			
 </style>
