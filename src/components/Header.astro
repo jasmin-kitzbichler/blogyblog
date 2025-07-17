@@ -13,11 +13,12 @@ import navEn from '../i18n/nav/en.ts';
 const nav = isEnglish ? navEn : navDe;
 const langPrefix = isEnglish ? '/en' : '';
 ---
+
 <header  class="">
   <div class="top-bar">
     <!-- Site title / logo -->
     <div class="site-title">
-      <a href={`${langPrefix}/`}>{SITE_TITLE}</a>
+      <a href={`${langPrefix}/`}><img src="/src/assets/logo.png" alt="">{SITE_TITLE}</a>
     </div>
 
   	<div class="language">
@@ -74,10 +75,21 @@ header {
 }
 
 .site-title {
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-family: 'Boogaloo', sans-serif;
+  font-size: 1.3rem;
   text-decoration: none;
   color: rgb(var(--black));
+
+  a{
+    display: flex;
+    align-items: center;
+
+  }
+
+  img{
+    width: 3rem;
+    margin: 0 1rem 0 0;
+  }
 }
 
       .side-menu {

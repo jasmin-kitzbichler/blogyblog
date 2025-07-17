@@ -16,7 +16,8 @@
     "@tailwindcss/vite": "^4.1.11",
     "astro-navbar": "^2.4.0",
     "sharp": "^0.34.2",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "vanilla-cookieconsent": "^3.1.0"
   },
   "devDependencies": {
     "astro": "^5.10.0",
