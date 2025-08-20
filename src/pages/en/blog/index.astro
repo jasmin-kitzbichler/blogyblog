@@ -1,7 +1,7 @@
 ---
 import BaseHead from '../../../components/BaseHead.astro';
 import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
+import FooterEng from '../../../components/en-components/FooterEng.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../../components/FormattedDate.astro';
@@ -38,7 +38,8 @@ const getLangEmoji = (lang: string): string => {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Blog" description="Thoughts, experiences and behind-the-scenes stories - my personal blog on design, web, sports, and life in between."
+ />
 	</head>
 	<body>
 		<Header />
@@ -47,7 +48,7 @@ const getLangEmoji = (lang: string): string => {
     <h1 class="subpage-heading">Blog Collection</h1>
     <p class="subpage-desc">
       Welcome to my little thought archive.<br />
-      Here you’ll find everything that moves, challenges, or inspires me – sometimes structured, sometimes beautifully messy.
+      Here you’ll find everything that moves, challenges, or inspires me - sometimes structured, sometimes beautifully messy.
       Always authentic, honest, and without the pressure of perfection. Written with heart, brain, and a healthy dose of coffee.
     </p>
 
@@ -99,7 +100,7 @@ const getLangEmoji = (lang: string): string => {
   </section>
 </main>
 
-		<Footer />
+		<FooterEng />
 
 		<script>
 			

@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'jasminkitzbichler.com';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_URL = 'https://jasminkitzbichler.com';

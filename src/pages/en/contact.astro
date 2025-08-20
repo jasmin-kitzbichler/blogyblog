@@ -2,20 +2,22 @@
 import BaseHead from '../../components/BaseHead.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import FooterEng from '../../components/en-components/FooterEng.astro';
 import { Image } from 'astro:assets';
 
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title="Contact"
+description="Want to get in touch? Here’s how you can reach out to me."
+/>
   </head>
   <body>
     <Header />
     <section class="contact-section">
       <h1 class="subpage-heading">Contact Form</h1>
-      <p>Say what's on your mind or ask me anything – this is your little digital notepad straight to my inbox. Just fill it out & hit send!</p>
+      <p>Say what's on your mind or ask me anything - this is your little digital notepad straight to my inbox. Just fill it out & hit send!</p>
       <form
         action="https://submit-form.com/mlmLU1wyU"
         method="POST"
@@ -44,7 +46,7 @@ import { Image } from 'astro:assets';
         <button type="submit">Send</button>
       </form>
     </section>
-    <Footer />
+    <FooterEng />
   </body>
 </html>
 

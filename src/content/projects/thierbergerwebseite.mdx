@@ -1,22 +1,25 @@
 ---
 title: "Thierberger Schützen Webseite"
-description: "Neue Vereinswebseite für die Thierberger Schützen – von Grund auf mit SvelteKit entwickelt, inklusive Social Wall & Terminkalender"
+description: "Neue Vereinswebseite für die Thierberger Schützen - von Grund auf mit SvelteKit entwickelt, inklusive Social Wall & Terminkalender"
 pubDate: 'Jul 05 2025'
 image: '../../assets/projects/thierbergweb/JK993031.jpg'
+imageAlt: "Die Thierberger Schützen an Frohnleichnam"
+groupID: 'thierbergwebsite'
+lang: 'de'
 ---
 
 **Projekt:** Thierberger Schützen Webseite  
 **Status:** Ehrenamtlich  
-**Umsetzung:** Dezember 2024 – März 2025  
+**Umsetzung:** Dezember 2024 - März 2025  
 **Bereich:** Web-Auftritt  
 **Technologien:** SvelteKit, Tailwind, Vercel  
-**Link:** [thierberger-schuetzen.at](https://thierberger-schuetzen.at)
+**Link:** <a href="https://thierberger-schuetzen.at" target="_blank" rel="noopener noreferrer">thierberger-schuetzen.at</a>
 
 ---
 
 ### Ausgangslage
 
-Die Thierberger Schützen hatten bisher nur Facebook und Instagram (beides von mir betreut, siehe Projektlink), aber keine eigene Webseite. Der Wunsch bestand darin, eine zentrale Plattform für grundlegende Infos bereitzustellen – etwa zur Vereinsstruktur, zum Ausschuss oder zur Kontaktaufnahme.
+Die Thierberger Schützen hatten bisher nur Facebook und Instagram (beides von mir betreut, siehe Projektlink), aber keine eigene Webseite. Der Wunsch bestand darin, eine zentrale Plattform für grundlegende Infos bereitzustellen - etwa zur Vereinsstruktur, zum Ausschuss oder zur Kontaktaufnahme.
 
 ### Anforderungen
 
@@ -25,10 +28,19 @@ Gewünscht war ein Kalender mit anstehenden Terminen sowie ein einfacher Zugang 
 
 ### Umsetzung
 
-Statt eines klassischen CMS wie WordPress entschied ich mich – auch aus Wartungsgründen – für eine eigenentwickelte Lösung mit SvelteKit, gehostet über Vercel.
+Statt eines klassischen CMS wie WordPress entschied ich mich - auch aus Wartungsgründen - für eine eigenentwickelte Lösung mit SvelteKit, gehostet über Vercel.
 
 Zur Darstellung aktueller Inhalte integrierte ich eine Social Wall, die automatisch Beiträge von Instagram übernimmt.
 
 Zusätzlich erstellte ich einen Google Kalender und band ihn in die Seite ein. Der Ausschuss erhielt Zugang zum Kalender, um selbstständig Termine zu pflegen.
 
 Abschließend richtete ich Domain und Hosting ein. Die einzigen laufenden Kosten liegen bei etwa 20 € pro Jahr für die Domainlizenz.
+
+import { Image } from "astro:assets";
+import Mockup from "../../assets/projects/thierbergweb/thierbergmockup.png";
+
+
+<div class="post-image-grid">
+ <Image src={Mockup} alt="Mockup Thierberg Website Mobile und Web" />
+
+</div>

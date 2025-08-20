@@ -52,7 +52,7 @@ export const config: CookieConsentConfig = {
           acceptNecessaryBtn: 'Nur notwendige',
           showPreferencesBtn: 'Einstellungen',
           footer:
-            '<a href="/datenschutz">Datenschutzerklärung</a>',
+            '<a href="/privacy">Datenschutzerklärung</a>',
         },
         preferencesModal: {
           title: 'Datenschutzeinstellungen',
@@ -82,7 +82,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Mehr Informationen',
               description:
-                'Bei Fragen besuche bitte unsere <a href="/datenschutz">Datenschutzerklärung</a>.',
+                'Bei Fragen besuche bitte unsere <a href="/privacy">Datenschutzerklärung</a>.',
             },
           ],
         },

@@ -2,14 +2,14 @@
 import BaseHead from '../../components/BaseHead.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import FooterEng from '../../components/en-components/FooterEng.astro';
 import { Image } from 'astro:assets';
 
 // 1. Bilder importieren
 const modules = import.meta.glob('/src/assets/snapshots/*.{jpg,png}', { eager: true });
 let images = Object.values(modules).map((m: any) => m.default);
 
-// 2. Shuffle-Funktion (Fisher–Yates)
+// 2. Shuffle-Funktion (Fisher-Yates)
 function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -23,7 +23,9 @@ images = shuffle(images);
 
 <html lang="de">
   <head>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}></BaseHead>
+	<BaseHead title="Gallery"
+description="A glimpse into my world - snapshots from sport, competitions, and everyday life."
+></BaseHead>
 </head>
   <body>
     <Header />
@@ -44,7 +46,7 @@ images = shuffle(images);
         }
       </div>
     </section>
-    <Footer/>
+    <FooterEng/>
   </body>
 </html>
 

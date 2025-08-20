@@ -1,0 +1,175 @@
+---
+const today = new Date();
+import CookieConsent from '../../components/CookieConsent.astro';
+---
+
+<footer>
+  <section class="footer">
+    <div class="width-container">
+      <div class="footer-grid">
+        <div class="left">
+          <p>Created with love and passion</p>
+          <h2>jasminkitzbichler.com</h2>
+        </div>
+        <div class="right">
+          <div class="social-links-container">
+            <h3>Where to find me</h3>
+            <div class="social-links">
+              <a href="https://www.instagram.com/jasminkitzbichler/" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="/src/assets/instagram.png"><p>jasminkitzbichler.com</p></a>
+              <a href="https://www.tiktok.com/@justjassythings" title="TikTok" target="_blank" rel="noopener noreferrer"><img src="/src/assets/tiktok.png"><p>justjassythings</p></a>
+              <a href="https://www.linkedin.com/in/jasmin-kitzbichler-518176135/" title="LinkedIn" target="_blank" rel="noopener noreferrer"><img src="/src/assets/linkedin.png"><p>Jasmin Kitzbichler</p></a>
+            </div>
+          </div>
+          <div class="contact">
+            <h3>Contact</h3>
+            <div class="contact-links">
+              <a href="/en/contact"><img src="/src/assets/contact-book.png"><p>Contact form</p></a>
+              <a href="mailto:jasmin.kitzbichler@gmail.com"><img src="/src/assets/envelope.png"><p>jasmin.kitzbichler@gmail.com</p></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="devider"></span>
+      <div class="bottom">
+        {today.getFullYear()} Jasmin Kitzbichler. All rights reserved.
+        <nav class="footer-links">
+          <a href="/en/legal">Legal Disclosure</a>
+          <a href="/en/privacy">Privacy Policy</a>
+        </nav>
+      </div>
+      <div>
+        <!-- TODO auto-switch language -->
+        <!-- TODO redesign footer -->
+      </div>
+    </div>
+  </section>
+  <CookieConsent />
+</footer>
+<style>
+	footer {
+		margin-top: -2rem;
+		padding-top: 2rem;
+		padding-bottom: 1rem;
+		border-top: 0.2rem solid #fff;
+  		background-color: var(--background);
+		border-radius: 2rem 2rem 0 0;
+		box-shadow: var(--box-shadow-section);
+		
+	}
+
+	.left{
+		p{
+			margin: 0;
+		}
+		h2{
+			font-weight: 600;
+			font-size: 1.8rem;
+			margin: 0.5rem 0;
+		}
+	}
+	.right{
+		display: flex;
+		gap: 1rem;
+
+		.contact{
+
+			.contact-links {
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			margin-top: 1rem;
+			
+			a{
+				display: flex;
+				align-items: center;
+
+				&:hover{
+					color: initial;
+				}
+			}
+	
+			img{
+				width: 2.3rem;
+				height: 2.3rem;
+				margin: 0 1rem 0 0;
+			}
+		}
+		}
+		.social-links {
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			margin-top: 1rem;
+			
+			a{
+				display: flex;
+				align-items: center;
+
+				&:hover{
+					color: initial;
+				}
+			}
+	
+			img{
+				width: 2rem;
+				height: 2rem;
+				margin: 0 1rem 0 0;
+			}
+		}
+	}
+
+	.bottom {
+		display: flex;
+		justify-content: space-between;
+
+		nav{
+			a {
+				margin: 0 0.5rem 0 0;
+			}
+		}
+	}
+
+	.footer-grid{
+		display: flex;
+		justify-content: space-between;
+
+		
+		h3{
+				font-size: 1.2rem;
+				font-weight: 600;
+		}
+		
+	}
+
+	.devider {
+      display: block;
+      border-top: 0.2rem solid #fff;
+      width: 100%;
+      height: 1px;
+	  margin-top: 1rem;
+
+    }
+
+	@media (max-width: 900px) {
+
+
+	.right{
+		flex-direction: column;
+	}
+
+	.bottom{
+		flex-direction: column;
+
+	}
+
+	}
+
+
+	@media (max-width: 500px) {
+    .footer-grid{
+		flex-direction: column;
+	}
+
+  }
+
+</style>

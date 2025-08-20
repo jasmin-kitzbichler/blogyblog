@@ -30,6 +30,7 @@ const getLangEmoji = (lang: string): string => {
       return "🌐";
   }
 };
+
 ---
 
 
@@ -46,7 +47,7 @@ const getLangEmoji = (lang: string): string => {
             <a href={`/blog/${post.id}/`}>
               <div class="blogteaserImage">
                 {post.data.heroImage && (
-                  <Image src={post.data.heroImage} alt="" />
+                  <Image src={post.data.heroImage} alt={post.data.heroAlt ?? ""} />
                 )}
                 <p class="lang">{getLangEmoji(post.data.lang)}</p>
                 {post.data.category && (

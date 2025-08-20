@@ -1,15 +1,19 @@
 TODOs:
 - Cookie Banner ✅
 - Cookie Banner -> Analytics ID
-- Blog & Projekt Layout verbessern
-- Footer überarbeiten (auch mobil!!!)
+- Blog & Projekt Layout verbessern ✅
+- Footer überarbeiten (auch mobil!!!) ✅
+- Datenschutz und Impressum Englisch ✅
 - Blogeinträge erstellen 
 - Projekt eintrag für Thierberg Social Media
 - Lustige Mdx Komponenten erstellen (Lyrics Komponente,...)
-- Skill Section: Kontakt Kastl überarbeiten
+    - Lyrics Komponente responsive
+    - blogtextwithimage responsive anders reihen
+- Skill Section: Kontakt Kastl überarbeiten ✅
 - Barrierefreiheit checken
 - Logo einfügen ✅
 - Hover Doodle Elemente
-- SEO Titel und Beschreibung vereinheitlichen
+- SEO Titel und Beschreibung vereinheitlichen ✅
 - Alt Texte
+    - Blog/Projekte Alttext! ✅
 - Favicon ✅

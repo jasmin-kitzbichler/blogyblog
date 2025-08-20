@@ -1,21 +1,23 @@
 ---
 import BaseHead from '../../../components/BaseHead.astro';
 import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
+import FooterEng from '../../../components/en-components/FooterEng.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
-const posts = (await getCollection('projects')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// Hole nur die englischsprachigen Projekte
+const posts = (await getCollection('projects'))
+  .filter((post) => post.data.lang === 'en')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title="Projects"
+description="A selection of projects I've worked on over the past years - from passion-driven ideas to professional implementations."/>
   </head>
   <body>
     <Header />
@@ -23,13 +25,13 @@ const posts = (await getCollection('projects')).sort(
       <section class="projects-overview-section">
         <h1 class="subpage-heading">Projects</h1>
         <p class="subpage-desc">
-          A selection of projects I've worked on over the past years – ranging from personal playgrounds to voluntary and professional implementations.
+          A selection of projects I've worked on over the past years - ranging from personal playgrounds to voluntary and professional implementations.
         </p>
         <ul>
           {
             posts.map((post) => (
               <li class="project-post">
-                <a href={`/projects/${post.id}/`}>
+                <a href={`/en/projects/${post.id}/`}>
                   <div class="project-image">
                     {post.data.image && (
                       <Image src={post.data.image} alt="" />
@@ -51,9 +53,10 @@ const posts = (await getCollection('projects')).sort(
         </ul>
       </section>
     </main>
-    <Footer />
+    <FooterEng />
   </body>
 </html>
+
 
 
 <style lang="scss">

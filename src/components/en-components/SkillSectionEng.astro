@@ -40,33 +40,33 @@ import { categoryMap } from "../../categoryMap";
       <div class="card education">
         <h3>Education</h3>
         <ul>
-          <li class="addinfo-small">🎓 FH Kufstein – BSc. Web Business & Technology <p>2017 – 2020</p></li>
-          <li class="addinfo-small">🏛️ FernUni Hagen – Political Science <p>since 2022</p></li>
+          <li class="addinfo-small">🎓 FH Kufstein - BSc. Web Business & Technology <p>2017 - 2020</p></li>
+          <li class="addinfo-small">🏛️ FernUni Hagen - Political Science <p>since 2022</p></li>
         </ul>
       </div>
 
       <div class="card jobs">
         <h3>Work Experience</h3>
         <ul>
-          <li class="addinfo-small">💼 Internship – Kufgem <p>05–07/2020</p></li>
-          <li class="addinfo-small">💻 Web Developer – Kufgem <p>2020–2021</p></li>
+          <li class="addinfo-small">💼 Internship - Kufgem <p>05-07/2020</p></li>
+          <li class="addinfo-small">💻 Web Developer - Kufgem <p>2020-2021</p></li>
           <li class="addinfo-small">🎯 Military athlete <p>since 2021</p></li>
         </ul>
       </div>
 
       <div class="card langs">
         <h3>Languages</h3>
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <span style="font-size: 2rem;">🇩🇪</span>
-          <span style="font-size: 2rem;">🇬🇧</span>
-          <span style="font-size: 2rem;">🇮🇹</span>
-          <span style="font-size: 2rem;">🇫🇷</span>
-        </div>
+        <ul>
+                    <li style="font-size: 2.5rem;">🇩🇪</li>
+                    <li style="font-size: 2.5rem;">🇬🇧</li>
+                    <li style="font-size: 2.5rem;">🇮🇹</li>
+
+                </ul>
       </div>
 
       <div class="card contactme">
         <h3>Contact</h3>
-        <p><a href="#contact">Contact link</a></p>
+        <p><a href="#contact">Send me a message</a></p>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@ import { categoryMap } from "../../categoryMap";
                         content:'';
                         background-image: url(../../assets/information.png);
                         background-size: cover;
-                        margin: 0 0.5rem;
+                        margin: 0 0.2rem;
                         width: 1.5rem;
                         height: 1.5rem;
                         position: absolute;
@@ -221,6 +221,31 @@ import { categoryMap } from "../../categoryMap";
             .jobs { grid-area: 2 / 3 / 3 / 4; }
             .langs { grid-area: 3 / 1 / 4 / 2; }
             .contactme { grid-area: 3 / 3 / 4 / 4; }
+
+            .contactme {
+                background-image: url("../../assets/PaperPlane.png");
+                display: block;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: right;
+
+                p{
+                    margin: 1rem;
+                }
+
+            }
+
+            .langs{
+                ul{
+                    display: flex;
+                }
+                li {
+                    width: 25%;
+                    text-align: center;
+                    line-height: 3rem;
+                }
+
+            }
         }
 }
 

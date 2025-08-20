@@ -12,12 +12,12 @@ Dies ist die persönliche Portfolio-Webseite von Jasmin Kitzbichler. Die Seite p
 
 ## 📁 Projektstruktur (Auszug)
 
-- `src/content/` – Blogposts & Projektbeiträge
-- `src/pages/` – Seitenrouten
-- `src/layouts/` – Layout-Komponenten
-- `src/components/` – Wiederverwendbare UI-Komponenten
-- `public/` – Statische Dateien (z. B. Bilder)
-- `.astro` Dateien – Seiten & Komponenten im Astro-Format
+- `src/content/` - Blogposts & Projektbeiträge
+- `src/pages/` - Seitenrouten
+- `src/layouts/` - Layout-Komponenten
+- `src/components/` - Wiederverwendbare UI-Komponenten
+- `public/` - Statische Dateien (z. B. Bilder)
+- `.astro` Dateien - Seiten & Komponenten im Astro-Format
 
 ## 🧑‍💻 Entwicklung
 

@@ -1,0 +1,57 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import Header from '../../components/Header.astro';
+import FooterEng from '../../components/en-components/FooterEng.astro';
+import { Image } from 'astro:assets';
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title="Legal Disclosure"
+description="Information according to § 5 ECG, § 14 UGB, § 25 Austrian Media Act - Responsible for content and contact details."
+></BaseHead>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="impressum-section">
+        <h1 class="subpage-heading">Legal Disclosure</h1>
+        <p>Information provided according to § 5 E-Commerce Act, § 14 Austrian Commercial Code, § 63 Austrian Trade Regulation Act and § 25 Media Act.</p>
+
+        <p><strong>Name:</strong> Jasmin Kitzbichler</p>
+        <p><strong>Address:</strong> 6330 Kufstein, Austria</p>
+        <p><strong>Email:</strong> <a href="mailto:jasmin.kitzbichler@gmail.com">jasmin.kitzbichler@gmail.com</a></p>
+        <p><strong>Website:</strong> <a href="https://jasminkitzbichler.com">https://jasminkitzbichler.com</a></p>
+
+        <p><strong>Business purpose:</strong> Personal website, portfolio, blog</p>
+        <p><strong>Member of the Austrian Chamber of Commerce:</strong> Not applicable (private individual)</p>
+
+        <p><strong>Liability for content:</strong><br />
+          The contents of this website have been created with the utmost care. However, I cannot guarantee the accuracy, completeness, or timeliness of the content.
+        </p>
+
+        <p><strong>Liability for links:</strong><br />
+          This website contains links to external third-party websites. I have no influence over their content and therefore cannot accept any responsibility for it.
+        </p>
+
+        <p><strong>Copyright:</strong><br />
+          All content on this site is subject to copyright. Third-party contributions are marked as such. Duplication, editing, or distribution requires written permission.
+        </p>
+      </section>
+    </main>
+    <FooterEng />
+  </body>
+</html>
+
+<style lang="scss">
+
+    .impressum-section{
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+
+        p, h2{
+            text-align: center;
+        }
+    }

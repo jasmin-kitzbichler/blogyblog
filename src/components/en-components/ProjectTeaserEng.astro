@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../FormattedDate.astro';
 import { Image } from 'astro:assets';
 
+// Nur englische Projekte holen und die drei neuesten anzeigen
 const projects = (await getCollection('projects'))
+  .filter((project) => project.data.lang === 'en')
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
@@ -18,29 +20,30 @@ const projects = (await getCollection('projects'))
       {
         projects.map((project) => (
           <li>
-            <a href={`/projects/${project.id}/`}>
+            <a href={`/en/projects/${project.id}/`}>
               <div class="projectteaserImage">
                 {project.data.image && (
-                  <Image src={project.data.image} alt="" />
+                  <Image src={project.data.image} alt={project.data.imageAlt ?? ""} />
                 )}
                 <p class="date">
                   <FormattedDate date={project.data.pubDate} />
                 </p>
               </div>
-            <div class="cardbottom">
-              <h3>{project.data.title}</h3>
-              <p>{project.data.description}</p>
-            </div>
+              <div class="cardbottom">
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+              </div>
             </a>
           </li>
         ))
       }
     </ul>
     <p class="more-link">
-      <a href="/projects">View all Projects →</a>
+      <a href="/en/projects">View all Projects →</a>
     </p>
   </div>
 </section>
+
 
 <style lang="scss">
 .project-preview {

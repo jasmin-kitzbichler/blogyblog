@@ -3,86 +3,107 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FooterEng from '../components/en-components/FooterEng.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
 type Props = CollectionEntry<'projects'>['data'];
 
-const { title, description, pubDate, updatedDate, image } = Astro.props;
+const { title, description, pubDate, updatedDate, image, imageAlt, lang } = Astro.props;
+
+const getLangEmoji = (lang: string): string => {
+  switch (lang) {
+    case 'de':
+      return '🇩🇪';
+    case 'en':
+      return '🇬🇧';
+    default:
+      return '🌐';
+  }
+};
+
+const imageAltText = imageAlt ?? "";
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.project-image {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-			}
-			.project-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 1em 0;
-				padding: 1rem 0;
-				font-size: 2rem;
-				border-top: 0.15rem solid #fff;
-   			    border-bottom: 0.15rem solid #fff;
-			}
-			.date {
-				margin-bottom: 0.5em;
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<html>
+  <head>
+		<BaseHead
+		title={title}
+		description={description}
+		lang={lang}
+		slug={`/projects/${Astro.url.pathname.split('/projects/')[1]}`}
+		image={image}
+		type="article"
+		/>
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="project-image">
-					{image && <Image src={image} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Header />
+    <main>
+      <article>
+        <h1 class="blog-title subpage-heading">{title}</h1>
+        <div class="facts">
+          <div class="date">
+            <FormattedDate date={pubDate} />
+          </div>
+        </div>
+
+        {description && <p class="desc">{description}</p>}
+
+        <div class="hero-image">
+          {image && <Image width={1020} height={510} src={image} alt={imageAltText} />}
+        </div>
+
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
+    </main>
+    {lang === 'en' ? <FooterEng /> : <Footer />}
+  </body>
 </html>
+
+<style lang="scss">
+main {
+  width: 80%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.hero-image {
+  width: 100%;
+  margin: 1rem auto;
+}
+.hero-image img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+.prose {
+  margin: auto;
+}
+.desc {
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+.facts {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: center;
+  gap: 1rem;
+
+  .lang,
+  .date,
+  .updated {
+    background-color: var(--accent);
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
+    width: fit-content;
+    margin: 0;
+    box-shadow: var(--box-shadow-card);
+    font-size: 0.9rem;
+  }
+}
+</style>

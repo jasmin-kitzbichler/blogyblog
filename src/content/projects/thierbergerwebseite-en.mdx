@@ -1,0 +1,46 @@
+---
+title: "Thierberger Rifle Club Website"
+description: "New club website for the Thierberger Schützen - built from scratch with SvelteKit, including a social wall and event calendar"
+pubDate: 'Jul 05 2025'
+image: '../../assets/projects/thierbergweb/JK993031.jpg'
+imageAlt: "The Thierberger Schützen on Corpus Christi"
+groupID: 'thierbergwebsite'
+lang: 'en'
+---
+
+**Project:** Thierberger Rifle Club Website  
+**Status:** Voluntary  
+**Implementation:** December 2024 - March 2025  
+**Focus:** Web Presence  
+**Tech Stack:** SvelteKit, Tailwind, Vercel  
+**Link:** <a href="https://thierberger-schuetzen.at" target="_blank" rel="noopener noreferrer">thierberger-schuetzen.at</a>
+
+---
+
+### Initial Situation
+
+Until now, the Thierberger Schützen had only maintained Facebook and Instagram accounts (both managed by me, see related project), but no official website. The aim was to create a central platform for basic information - such as club structure, board members, and contact details.
+
+### Requirements
+
+The website was intended to have minimal ongoing costs, require little maintenance, and not need regular content updates (as those already happen on social media).  
+The club specifically requested an event calendar and an easy way for board members to make content changes.
+
+### Implementation
+
+Instead of using a traditional CMS like WordPress, I opted for a custom-built solution using SvelteKit, hosted via Vercel - mainly to reduce maintenance needs.
+
+To display current content, I integrated a **social wall** that automatically pulls posts from Instagram.
+
+Additionally, I created a Google Calendar and embedded it on the site. The board was given access to the calendar to independently manage and update upcoming events.
+
+Finally, I set up the domain and hosting. The only ongoing expense is around €20 per year for the domain license.
+
+import { Image } from "astro:assets";
+import Mockup from "../../assets/projects/thierbergweb/thierbergmockup.png";
+
+
+<div class="post-image-grid">
+ <Image src={Mockup} alt="Mockup Thierberg Website Mobile and Web" />
+
+</div>

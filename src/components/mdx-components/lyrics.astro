@@ -1,0 +1,149 @@
+---
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  artist: string;
+  title: string;
+  album?: string;
+  year?: string | number;
+  albumCover?: ImageMetadata;   // pass an imported image
+  albumCoverAlt?: string;
+  lyrics?: string;              // optional—otherwise use the slot
+}
+
+const {
+  artist,
+  title,
+  albumCover,
+  albumCoverAlt = `${title} — album cover`,
+  lyrics,
+} = Astro.props;
+---
+
+<figure class="lyrics-card">
+  <header class="meta">
+    <div class="disc">
+    {albumCover && (
+      <img class="cover" src={albumCover.src} width={160} height={160} alt={albumCoverAlt} loading="lazy" />
+    )}
+    </div>
+    <div class="titles">
+        <div class="info">
+            <h3 class="song">{title}</h3>
+            <p class="artist">{artist}</p>
+        </div>
+    </div>
+</header>
+<div class="lyrics-wrapper">
+  {lyrics
+    ? <pre class="lyrics" id="lyrics"><code>{lyrics}</code></pre>
+    : <pre class="lyrics" id="lyrics"><code><slot /></code></pre>}
+</div>
+
+
+</figure>
+
+
+<style lang="scss">
+  .lyrics-card {
+    border: 2px solid var(--accent, #000);
+    border-radius: 16px;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: var(--box-shadow-card, 0 8px 24px rgba(0,0,0,.08));
+    max-width: 400px;
+    float: right;
+    margin: 0 0 0 1rem;
+  }
+
+  .meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: .5rem;
+  }
+
+  .info{
+    margin: 1rem 0;
+  }
+
+/* runder Wrapper für das Cover (kein ::before auf <img> selbst!) */
+.disc {
+  position: relative;
+  width: 30%;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 auto;
+  /* optional: subtile Vinyl-Ringe */
+  background:
+    radial-gradient(closest-side, rgba(0,0,0,0.06), transparent 60%) center/100% 100%,
+    radial-gradient(circle at 50% 50%, transparent 0 58%, rgba(0,0,0,0.08) 59%, transparent 60%) center/100% 100%;
+}
+
+/* Spindel-Loch in der Mitte */
+.disc::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;                 /* größer sichtbar machen */
+  height: 8px;
+  background-color: #fff;     /* ggf. an dein Theme anpassen */
+  border: 2px solid rgba(0,0,0,.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* das eigentliche Coverbild */
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: none;               /* oder grayscale(1) je nach Look */
+  transform-origin: 50% 50%;
+}
+
+/* Rotation (dauerhaft oder auf Hover) */
+.disc .cover {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+  .titles { line-height: 1.2; }
+  .song {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .artist {
+    margin: .15rem 0 0 0;
+    font-weight: 600;
+  }
+  .album {
+    margin: .15rem 0 0 0;
+    color: rgb(100 100 100);
+  }
+
+  .lyrics-wrapper { margin-top: .75rem; }
+
+  .lyrics {
+    white-space: pre-wrap;   /* keep line breaks */
+    word-wrap: break-word;
+    margin: 0;
+    padding: .75rem 1rem;
+    border: 1px dashed var(--accent, #000);
+    border-radius: 12px;
+    background: #fafafa;
+    max-height: none;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+</style>

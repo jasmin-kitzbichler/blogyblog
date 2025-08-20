@@ -7,15 +7,17 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
-const posts = (await getCollection('projects')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// Hole nur die deutschsprachigen Projekte
+const posts = (await getCollection('projects'))
+  .filter((post) => post.data.lang === 'de')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
 <html lang="de">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+ <BaseHead title="Projekte"
+description="Eine Auswahl an Projekten, an denen ich in den letzten Jahren gearbeitet habe - von Herzenssachen bis zu professionellen Umsetzungen."/>
   </head>
   <body>
     <Header />
@@ -23,7 +25,7 @@ const posts = (await getCollection('projects')).sort(
       <section class="projects-overview-section">
         <h1 class="subpage-heading">Projekte</h1>
         <p class="subpage-desc">
-          Eine Auswahl an Projekten, an denen ich in den letzten Jahren gearbeitet habe – von persönlichen Spielwiesen bis hin zu ehrenamtlichen und professionellen Umsetzungen.
+          Eine Auswahl an Projekten, an denen ich in den letzten Jahren gearbeitet habe - von persönlichen Spielwiesen bis hin zu ehrenamtlichen und professionellen Umsetzungen.
         </p>
         <ul>
           {

@@ -9,7 +9,7 @@ import { Image } from 'astro:assets';
 const modules = import.meta.glob('/src/assets/snapshots/*.{jpg,png}', { eager: true });
 let images = Object.values(modules).map((m: any) => m.default);
 
-// 2. Shuffle-Funktion (Fisher–Yates)
+// 2. Shuffle-Funktion (Fisher-Yates)
 function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -23,12 +23,14 @@ images = shuffle(images);
 
 <html lang="de">
   <head>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}></BaseHead>
+	<BaseHead title="Galerie"
+description="Einblicke in meine Welt - Momentaufnahmen aus Sport, Wettkampf und Alltag."
+></BaseHead>
 </head>
   <body>
     <Header />
     <section class="snapshot-gallery">
-      <h1 class="subpage-heading">Gallerie</h1>
+      <h1 class="subpage-heading">Galerie</h1>
 
       <div class="gallery-columns">
         {
