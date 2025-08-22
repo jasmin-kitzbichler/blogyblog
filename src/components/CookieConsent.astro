@@ -4,23 +4,39 @@ import '../styles/ccElegantBlack.css';
 ---
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 
-<script>
-  import CookieConsent from 'vanilla-cookieconsent';
-  import { config } from './CookieConsentConfig.ts';
-  import { initGA, grantAnalyticsConsent } from '../ga.ts';
+<script lang="ts">
+  import * as CC from 'vanilla-cookieconsent';
+  import { config } from './CookieConsentConfig';
+  import { initGA, grantAnalyticsConsent } from '../lib/ga';
 
-  // Custom Theme aktivieren
+  // Theme-Klasse
   document.body.classList.add('cc--elegant-black');
 
-  // Banner / Präferenzen starten
-  CookieConsent.run(config);
+  // Cross-compat: hol das CookieConsent-Objekt, egal wie exportiert
+  const CookieConsent: any =
+    (CC as any).CookieConsent ?? // Named export
+    (CC as any).default ??       // (falls es doch einen default gäbe)
+    CC;                          // Namespace selbst
 
-  // Bereits erteilte Zustimmung respektieren (nur in Production)
+  // HINWEIS: Wenn du "inline" nicht nutzt, stelle sicher, dass das Layout NICHT "inline" ist
+  // (sonst brauchst du <div data-cc="consent-modal"></div>).
+  CookieConsent.run({
+    ...config,
+    guiOptions: {
+      ...config.guiOptions,
+      consentModal: {
+        ...config.guiOptions?.consentModal,
+        // falls du keinen Inline-Platzhalter eingebaut hast, nimm "cloud" statt "cloud inline"
+        layout: 'cloud',
+      },
+    },
+  });
+
+  // Bereits erteilte Zustimmung respektieren (nur in Prod)
   if (import.meta.env.PROD) {
     const prefs = CookieConsent.getUserPreferences?.() || {};
-    const acceptedCats: string[] = prefs.acceptedCategories || [];
-    const acceptedServicesObj = prefs.acceptedServices || {};
-    const acceptedServices = Object.values(acceptedServicesObj).flat() as string[];
+    const acceptedCats = prefs.acceptedCategories || [];
+    const acceptedServices = Object.values(prefs.acceptedServices || {}).flat();
 
     const analyticsAllowed =
       acceptedCats.includes('analytics') || acceptedServices.includes('ga4');
@@ -29,13 +45,16 @@ import '../styles/ccElegantBlack.css';
       const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
       initGA(MEASUREMENT_ID);
       grantAnalyticsConsent();
-
-      // optional: direkt einen Pageview senden
-      (window as any).gtag?.('event', 'page_view', {
+      window.gtag?.('event', 'page_view', {
         page_location: location.href,
         page_path: location.pathname,
         page_title: document.title,
       });
     }
   }
+
+  // Debug-Helfer (temporär):
+  // (window as any).ccShow = () => CookieConsent.show(true);
+  // (window as any).ccReset = () => CookieConsent.reset(true);
+  // console.log('[CC] exports:', Object.keys(CC));
 </script>

@@ -7,7 +7,7 @@ const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 export const config: CookieConsentConfig = {
   guiOptions: {
     consentModal: {
-      layout: 'cloud inline',
+      layout: 'cloud',
       position: 'bottom middle',
     },
     preferencesModal: {
