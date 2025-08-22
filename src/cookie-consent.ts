@@ -1,3 +1,4 @@
+// src/scripts/cookie-consent.ts
 import * as CookieConsent from 'vanilla-cookieconsent';
 import { config } from './components/CookieConsentConfig';
 import { initGA, grantAnalyticsConsent } from './ga';
@@ -22,3 +23,7 @@ CookieConsent.run(config).then(() => {
     }
   }
 });
+
+// (optional) kleine Debug-Helfer:
+// (window as any).ccReset = () => CookieConsent.reset(true);
+// (window as any).ccShow  = () => CookieConsent.show(true);
