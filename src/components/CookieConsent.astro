@@ -4,17 +4,27 @@ import '../styles/ccElegantBlack.css';
 ---
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 <script type="module">
-// Load library as a side effect and then use the global it registers.
-import 'vanilla-cookieconsent';
+// Import config and GA functions
 import { config } from './CookieConsentConfig';
 import { initGA, grantAnalyticsConsent } from '../ga';
+
+// Load vanilla-cookieconsent dynamically
+async function loadCookieConsent() {
+  try {
+    await import('vanilla-cookieconsent');
+    return window.CookieConsent;
+  } catch (error) {
+    console.error('Failed to load vanilla-cookieconsent:', error);
+    return null;
+  }
+}
 
 // optional theme class
 document.body.classList.add('cc--elegant-black');
 
 // Ensure DOM is loaded
-function initializeCookieConsent() {
-  const CC = window.CookieConsent; // provided by the library
+async function initializeCookieConsent() {
+  const CC = await loadCookieConsent();
   
   if (!CC) {
     console.error('[CC] window.CookieConsent not available');
