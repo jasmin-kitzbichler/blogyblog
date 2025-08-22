@@ -1,4 +1,8 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
+import { initGA, grantAnalyticsConsent, denyAnalyticsConsent } from '../ga.ts';
+
+const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+
 
 export const config: CookieConsentConfig = {
   guiOptions: {
@@ -24,10 +28,24 @@ export const config: CookieConsentConfig = {
           label:
             '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4 (dummy)</a>',
           onAccept: () => {
-            console.log('ga4 accepted');
-            // TODO: load ga4
+            if (import.meta.env.PROD) {
+              // GA laden (falls noch nicht) und Consent freigeben
+              initGA(MEASUREMENT_ID);
+              grantAnalyticsConsent();
+              // Optional: aktuelles Pageview nachschicken
+              if ((window as any).gtag) {
+                (window as any).gtag('event', 'page_view', {
+                  page_location: location.href,
+                  page_path: location.pathname,
+                  page_title: document.title
+                });
+              }
+            }
           },
           onReject: () => {
+            // Consent Mode zurückziehen
+            denyAnalyticsConsent();
+            // CookieConsent kümmert sich um das Löschen der _ga-Cookies laut deiner cookies-Liste
             console.log('ga4 rejected');
           },
           cookies: [

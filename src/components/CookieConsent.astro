@@ -4,12 +4,38 @@ import '../styles/ccElegantBlack.css';
 ---
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 
-<script>
-    import { run } from 'vanilla-cookieconsent';
-    import { config } from './CookieConsentConfig';
+<script lang="ts">
+  import { run, CookieConsent } from 'vanilla-cookieconsent';
+  import { config } from './CookieConsentConfig.ts';
+  import { initGA, grantAnalyticsConsent } from '../ga.ts';
 
-    // toggle custom black theme
-    document.body.classList.add('cc--elegant-black');
+  // Custom Theme aktivieren
+  document.body.classList.add('cc--elegant-black');
 
-    run(config);
+  // Banner / Präferenzen starten
+  run(config);
+
+  // Bereits erteilte Zustimmung respektieren (nur in Production)
+  if (import.meta.env.PROD) {
+    const prefs = CookieConsent.getUserPreferences?.() || {};
+    const acceptedCats: string[] = prefs.acceptedCategories || [];
+    const acceptedServicesObj = prefs.acceptedServices || {};
+    const acceptedServices = Object.values(acceptedServicesObj).flat() as string[];
+
+    const analyticsAllowed =
+      acceptedCats.includes('analytics') || acceptedServices.includes('ga4');
+
+    if (analyticsAllowed) {
+      const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+      initGA(MEASUREMENT_ID);
+      grantAnalyticsConsent();
+
+      // optional: direkt einen Pageview senden
+      (window as any).gtag?.('event', 'page_view', {
+        page_location: location.href,
+        page_path: location.pathname,
+        page_title: document.title,
+      });
+    }
+  }
 </script>
