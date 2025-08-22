@@ -6,6 +6,13 @@ import BlogTeaser from '../components/BlogTeaser.astro';
 import ProjectTeaser from '../components/ProjectTeaser.astro';
 import SkillSection from '../components/SkillSection.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import { Image } from 'astro:assets';
+import hero from '../assets/hero-image-doodle.png';
+import macbook from '../assets/IMG_0394_2.jpg';
+import camerawoman from '../assets/JK991694.jpg';
+import itec from '../assets/IMG_3521.JPG';
+
 ---
 
 <!doctype html>
@@ -27,7 +34,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 							</div>
 							<div class="hero-photo">
-								<img src="/src/assets/hero-image-doodle.png" alt="Hero Portrait" class="hero-main-img" />
+								<Image src={hero} alt="Hero Portrait" class="hero-main-img" />
 							</div>
 						</div>
 						
@@ -40,9 +47,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 					</div>
 	
 					<div class="hero-trio">
-						<img class="img-behind" src="/src/assets/IMG_0394_2.jpg" alt="Bildschirm mit Code" />
-						<img src="/src/assets/JK991694.jpg" alt="Bild mit Kamera" />
-						<img src="/src/assets/IMG_3521.JPG" alt="Bild mit Luftgewehr Walther Itec" />
+						<Image src={macbook} class="img-behind" alt="Bildschirm mit Code" />
+						<Image src={camerawoman} alt="Bild mit Kamera" />
+						<Image src={itec}alt="Bild mit Luftgewehr Walther Itec" />
 					</div>
 
 				</div>
