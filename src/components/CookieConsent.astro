@@ -1,42 +1,48 @@
----
-import 'vanilla-cookieconsent/dist/cookieconsent.css';
-import '../styles/ccElegantBlack.css';
----
-<button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
-
-<script lang="ts">
+<script type="module">
   import * as CookieConsent from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
-  import { initGA, grantAnalyticsConsent } from '../ga'; // ohne .ts
+  import { initGA, grantAnalyticsConsent } from '../ga';
 
   document.body.classList.add('cc--elegant-black');
 
-  // für Console-Debug: window.CookieConsent.show(true) etc.
-  (window as any).CookieConsent = CookieConsent;
+  // (optional) für DevTools
+  window.CookieConsent = CookieConsent;
 
-  // Starten + danach Zustand prüfen
-  CookieConsent.run(config).then(() => {
-    // Falls noch kein gültiger Consent existiert → Banner anzeigen/erzeugen
-    if (!CookieConsent.validConsent()) {
-      CookieConsent.show(true);
-    }
-
-    // Bereits erteilte Zustimmung respektieren (Prod)
-    if (import.meta.env.PROD) {
-      const prefs = CookieConsent.getUserPreferences?.() || {};
-      const cats = prefs.acceptedCategories || [];
-      const services = Object.values(prefs.acceptedServices || {}).flat();
-
-      if (cats.includes('analytics') || services.includes('ga4')) {
-        const MID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
-        initGA(MID);
-        grantAnalyticsConsent();
-        window.gtag?.('event', 'page_view', {
-          page_location: location.href,
-          page_path: location.pathname,
-          page_title: document.title
-        });
-      }
-    }
+  CookieConsent.run({
+    ...config,
+    guiOptions: {
+      ...config.guiOptions,
+      consentModal: {
+        ...config.guiOptions?.consentModal,
+        position: 'bottom center', // WICHTIG: nicht "middle"
+      },
+    },
   });
+
+  // falls noch kein Consent existiert, Banner erzwingen
+  if (!CookieConsent.validConsent()) {
+    CookieConsent.show(true);
+  }
+
+  // bereits erteilte Zustimmung respektieren (nur Prod)
+  if (import.meta.env.PROD) {
+    const prefs = CookieConsent.getUserPreferences?.() || {};
+    const cats = prefs.acceptedCategories || [];
+    const services = Object.values(prefs.acceptedServices || {}).flat();
+
+    if (cats.includes('analytics') || services.includes('ga4')) {
+      const MID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+      initGA(MID);
+      grantAnalyticsConsent();
+      window.gtag?.('event', 'page_view', {
+        page_location: location.href,
+        page_path: location.pathname,
+        page_title: document.title,
+      });
+    }
+  }
+
+  // Debug-Helfer:
+  // window.ccReset = () => CookieConsent.reset(true);
+  // window.ccShow  = () => CookieConsent.show(true);
 </script>
