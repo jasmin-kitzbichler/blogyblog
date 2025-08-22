@@ -4,8 +4,8 @@ import '../styles/ccElegantBlack.css';
 ---
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 
-<script lang="ts">
-  import { run, CookieConsent } from 'vanilla-cookieconsent';
+<script>
+  import CookieConsent from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig.ts';
   import { initGA, grantAnalyticsConsent } from '../ga.ts';
 
@@ -13,7 +13,7 @@ import '../styles/ccElegantBlack.css';
   document.body.classList.add('cc--elegant-black');
 
   // Banner / Präferenzen starten
-  run(config);
+  CookieConsent.run(config);
 
   // Bereits erteilte Zustimmung respektieren (nur in Production)
   if (import.meta.env.PROD) {
