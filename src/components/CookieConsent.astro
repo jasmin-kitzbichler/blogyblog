@@ -1,11 +1,46 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import '../styles/ccElegantBlack.css';
-import cookieConsentModule from '../cookie-consent.ts?url';
-
 ---
-
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 
-<!-- als ES-Modul laden -->
-<script type="module" src={cookieConsentModule}></script>
+<script type="module">
+  // Load library as a side effect and then use the global it registers.
+  import 'vanilla-cookieconsent';
+  import { config } from './CookieConsentConfig';
+  import { initGA, grantAnalyticsConsent } from '../ga';
+
+  // optional theme class
+  document.body.classList.add('cc--elegant-black');
+
+  const CC = window.CookieConsent; // provided by the library
+  if (!CC) {
+    console.error('[CC] window.CookieConsent not available');
+  } else {
+    CC.run(config).then(() => {
+      // show banner if there is no valid consent yet
+      if (!CC.validConsent()) CC.show(true);
+
+      // respect already-given analytics consent (production only)
+      if (import.meta.env.PROD) {
+        const prefs = CC.getUserPreferences?.() || {};
+        const cats = prefs.acceptedCategories || [];
+        const services = Object.values(prefs.acceptedServices || {}).flat();
+        if (cats.includes('analytics') || services.includes('ga4')) {
+          const MID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+          initGA(MID);
+          grantAnalyticsConsent();
+          window.gtag?.('event', 'page_view', {
+            page_location: location.href,
+            page_path: location.pathname,
+            page_title: document.title,
+          });
+        }
+      }
+    });
+
+    // handy debug helpers while testing
+    window.ccReset = () => CC.reset(true);
+    window.ccShow  = () => CC.show(true);
+  }
+</script>
