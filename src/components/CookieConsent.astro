@@ -5,8 +5,8 @@ import '../styles/ccElegantBlack.css';
 <button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 <script type="module">
 // Import config and GA functions
-import { config } from '../components/CookieConsentConfig';
-import { initGA, grantAnalyticsConsent } from '../ga';
+import { config } from '../components/CookieConsentConfig.ts';
+import { initGA, grantAnalyticsConsent } from '../ga.ts';
 
 // Load vanilla-cookieconsent dynamically
 async function loadCookieConsent() {

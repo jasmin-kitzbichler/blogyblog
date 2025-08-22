@@ -1,29 +1,29 @@
-// src/scripts/cookie-consent.ts
-import * as CookieConsent from 'vanilla-cookieconsent';
-import { config } from './components/CookieConsentConfig';
-import { initGA, grantAnalyticsConsent } from './ga';
+// // src/scripts/cookie-consent.ts
+// import * as CookieConsent from 'vanilla-cookieconsent';
+// import { config } from './components/CookieConsentConfig';
+// import { initGA, grantAnalyticsConsent } from './ga';
 
-document.body.classList.add('cc--elegant-black');
+// document.body.classList.add('cc--elegant-black');
 
-CookieConsent.run(config).then(() => {
-  if (!CookieConsent.validConsent()) CookieConsent.show(true);
+// CookieConsent.run(config).then(() => {
+//   if (!CookieConsent.validConsent()) CookieConsent.show(true);
 
-  if (import.meta.env.PROD) {
-    const prefs = CookieConsent.getUserPreferences?.() || {};
-    const cats = prefs.acceptedCategories || [];
-    const services = Object.values(prefs.acceptedServices || {}).flat();
-    if (cats.includes('analytics') || services.includes('ga4')) {
-      initGA(import.meta.env.PUBLIC_GA_MEASUREMENT_ID);
-      grantAnalyticsConsent();
-      (window as any).gtag?.('event', 'page_view', {
-        page_location: location.href,
-        page_path: location.pathname,
-        page_title: document.title,
-      });
-    }
-  }
-});
+//   if (import.meta.env.PROD) {
+//     const prefs = CookieConsent.getUserPreferences?.() || {};
+//     const cats = prefs.acceptedCategories || [];
+//     const services = Object.values(prefs.acceptedServices || {}).flat();
+//     if (cats.includes('analytics') || services.includes('ga4')) {
+//       initGA(import.meta.env.PUBLIC_GA_MEASUREMENT_ID);
+//       grantAnalyticsConsent();
+//       (window as any).gtag?.('event', 'page_view', {
+//         page_location: location.href,
+//         page_path: location.pathname,
+//         page_title: document.title,
+//       });
+//     }
+//   }
+// });
 
-// (optional) kleine Debug-Helfer:
-// (window as any).ccReset = () => CookieConsent.reset(true);
-// (window as any).ccShow  = () => CookieConsent.show(true);
+// // (optional) kleine Debug-Helfer:
+// // (window as any).ccReset = () => CookieConsent.reset(true);
+// // (window as any).ccShow  = () => CookieConsent.show(true);
