@@ -5,32 +5,51 @@ type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 
-// Hole aktuelle URL (z. B. "/en/about")
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+// Helper: Pfade normalisieren (Trailing Slash weg, "/" Sonderfall)
+const normalize = (p: string | undefined) => {
+  if (!p) return '/';
+  try { p = decodeURI(p); } catch {}
+  // Leading: wie ist, Trailing: entfernen
+  p = p.replace(/\/+$/, '');
+  return p === '' ? '/' : p;
+};
 
-// Extrahiere ersten Pfad-Teil (z. B. "en" oder "blog")
-const subpath = pathname.split('/').filter(Boolean);
+// Aktueller Pfad (ohne BASE_URL), normalisiert
+const pathname = normalize(Astro.url.pathname.replace(import.meta.env.BASE_URL, ''));
 
-// Vergleiche Hauptpfad mit Ziel-Link
-const activePath = '/' + (subpath.length > 0 && subpath[0] === 'en' ? subpath[1] : subpath[0] || '');
-const isActive = href === activePath || href === pathname;
+// Ziel-Link als String + normalisiert
+const hrefStr = normalize(String(href ?? '/'));
+
+// Variante des href OHNE Sprachprefix "/en" (nur falls vorhanden)
+const hrefNoLang = normalize(hrefStr.replace(/^\/en(?=\/|$)/, ''));
+
+// "Sektion" des aktuellen Pfads ("/about", "/blog", …), Sprache wird herausgerechnet
+const parts = pathname.split('/').filter(Boolean);
+const section = normalize('/' + (parts[0] === 'en' ? (parts[1] ?? '') : (parts[0] ?? '')));
+
+// Aktiv-Logik:
+// 1) exakter Match (inkl. Sprachprefix)
+// 2) Match auf Sektion (href == "/about" und Pfad ist "/en/about" oder "/about")
+// 3) Sektionen aktiv lassen ("/blog" bleibt aktiv auf "/blog/…")
+const isActive =
+  hrefStr === pathname ||
+  hrefStr === section ||
+  hrefNoLang === section ||
+  (hrefStr !== '/' && pathname.startsWith(hrefStr + '/'));
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+  <slot />
 </a>
 
 <style>
 a {
-	display: inline-block;
-	text-decoration: none;
-	color: inherit;
-	padding: 0.25rem 0.5rem;
-	border-bottom: 3px solid transparent;
-	transition: border-color 0.2s ease;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s ease;
 }
-
-a.active {
-	font-weight: 600;
-}
+a.active { font-weight: 600; }
 </style>
