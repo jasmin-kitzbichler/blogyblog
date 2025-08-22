@@ -1,48 +1,11 @@
-<script type="module">
-  import * as CookieConsent from 'vanilla-cookieconsent';
-  import { config } from './CookieConsentConfig';
-  import { initGA, grantAnalyticsConsent } from '../ga';
+---
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+import '../styles/ccElegantBlack.css';
+import cookieConsentModule from '../cookie-consent.ts?url';
 
-  document.body.classList.add('cc--elegant-black');
+---
 
-  // (optional) für DevTools
-  window.CookieConsent = CookieConsent;
+<button type="button" data-cc="show-preferencesModal">Show preferences modal</button>
 
-  CookieConsent.run({
-    ...config,
-    guiOptions: {
-      ...config.guiOptions,
-      consentModal: {
-        ...config.guiOptions?.consentModal,
-        position: 'bottom center', // WICHTIG: nicht "middle"
-      },
-    },
-  });
-
-  // falls noch kein Consent existiert, Banner erzwingen
-  if (!CookieConsent.validConsent()) {
-    CookieConsent.show(true);
-  }
-
-  // bereits erteilte Zustimmung respektieren (nur Prod)
-  if (import.meta.env.PROD) {
-    const prefs = CookieConsent.getUserPreferences?.() || {};
-    const cats = prefs.acceptedCategories || [];
-    const services = Object.values(prefs.acceptedServices || {}).flat();
-
-    if (cats.includes('analytics') || services.includes('ga4')) {
-      const MID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
-      initGA(MID);
-      grantAnalyticsConsent();
-      window.gtag?.('event', 'page_view', {
-        page_location: location.href,
-        page_path: location.pathname,
-        page_title: document.title,
-      });
-    }
-  }
-
-  // Debug-Helfer:
-  // window.ccReset = () => CookieConsent.reset(true);
-  // window.ccShow  = () => CookieConsent.show(true);
-</script>
+<!-- als ES-Modul laden -->
+<script type="module" src={cookieConsentModule}></script>
