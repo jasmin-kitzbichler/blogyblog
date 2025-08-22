@@ -6,6 +6,12 @@ import BlogTeaserEng from '../../components/en-components/BlogTeaserEng.astro';
 import ProjectTeaserEng from '../../components/en-components/ProjectTeaserEng.astro';
 import SkillSectionEng from '../../components/en-components/SkillSectionEng.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+import { Image } from 'astro:assets';
+import hero from '../assets/hero-image-doodle.png';
+import macbook from '../assets/IMG_0394_2.jpg';
+import camerawoman from '../assets/JK991694.jpg';
+import itec from '../assets/IMG_3521.JPG';
 ---
 
 <!doctype html>
@@ -26,7 +32,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
                 <p class="location">📍 Kufstein, Austria</p>
               </div>
               <div class="hero-photo">
-                <img src="/src/assets/hero-image-doodle.png" alt="Hero portrait" class="hero-main-img" />
+                <Image src={hero}  alt="Hero portrait" class="hero-main-img" />
               </div>
             </div>
 
@@ -37,9 +43,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
           </div>
 
           <div class="hero-trio">
-            <img class="img-behind" src="/src/assets/IMG_0394_2.jpg" alt="Air rifle Walther Itec" />
-            <img src="/src/assets/JK991694.jpg" alt="With a camera" />
-            <img src="/src/assets/IMG_3521.JPG" alt="Screen with code" />
+            <Image src={macbook}  class="img-behind" alt="Air rifle Walther Itec" />
+            <Image src={camerawoman}  alt="With a camera" />
+            <Image src={itec}  alt="Screen with code" />
           </div>
         </div>
       </section>

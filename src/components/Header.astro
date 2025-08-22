@@ -3,6 +3,9 @@ import HeaderLink from './HeaderLink.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { SITE_TITLE } from '../consts';
 
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
 
 const currentPath = Astro.url.pathname;
 const isEnglish = currentPath.startsWith('/en');
@@ -18,7 +21,7 @@ const langPrefix = isEnglish ? '/en' : '';
   <div class="top-bar">
     <!-- Site title / logo -->
     <div class="site-title">
-      <a href={`${langPrefix}/`}><img src="/src/assets/logo.png" alt="">{SITE_TITLE}</a>
+      <a href={`${langPrefix}/`}><Image src={logo} alt="">{SITE_TITLE}</a>
     </div>
 
   	<div class="language">

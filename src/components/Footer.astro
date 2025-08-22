@@ -1,6 +1,15 @@
 ---
 const today = new Date();
 import CookieConsent from '../components/CookieConsent.astro';
+
+import { Image } from 'astro:assets';
+import instagram from '../assets/instagram.png';
+import tiktok from '../assets/tiktok.png';
+import linkedin from '../assets/linkedin.png';
+import form from '../assets/contact-book.png';
+import mail from '../assets/envelope.png';
+
+
 ---
 
 <footer>
@@ -15,16 +24,16 @@ import CookieConsent from '../components/CookieConsent.astro';
 						<div class="social-links-container">
 							<h3>Hier findest du mich</h3>
 							<div class="social-links">
-								<a href="https://www.instagram.com/jasminkitzbichler/" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="/src/assets/instagram.png"><p>jasminkitzbichler.com</p></a>
-								<a href="https://www.tiktok.com/@justjassythings" title="Tiktok" target="_blank" rel="noopener noreferrer"> <img src="/src/assets/tiktok.png"><p>justjassythings</p></a>
-								<a href="https://www.linkedin.com/in/jasmin-kitzbichler-518176135/" title="Tiktok" target="_blank" rel="noopener noreferrer"><img src="/src/assets/linkedin.png"><p>Jasmin Kitzbichler</p></a>
+								<a href="https://www.instagram.com/jasminkitzbichler/" title="Instagram" target="_blank" rel="noopener noreferrer"><Image src={instagram} alt=""/><p>jasminkitzbichler</p></a>
+								<a href="https://www.tiktok.com/@justjassythings" title="Tiktok" target="_blank" rel="noopener noreferrer"><Image src={tiktok} alt=""/><p>justjassythings</p></a>
+								<a href="https://www.linkedin.com/in/jasmin-kitzbichler-518176135/" title="Tiktok" target="_blank" rel="noopener noreferrer"><Image src={linkedin} alt=""/><p>Jasmin Kitzbichler</p></a>
 							</div>
 						</div>
 						<div class="contact">
 							<h3>Kontakt</h3>
 							<div class="contact-links">
-								<a href="/contact"><img src="/src/assets/contact-book.png"><p>Kontaktformular</p></a>
-								<a href="mailto:jasmin.kitzbichler@gmail.com"><img src="/src/assets/envelope.png"><p>jasmin.kitzbichler@gmail.com</p></a>
+								<a href="/contact"><Image src={form} alt=""/><p>Kontaktformular</p></a>
+								<a href="mailto:jasmin.kitzbichler@gmail.com"><Image src={mail} alt=""/><p>jasmin.kitzbichler@gmail.com</p></a>
 
 							</div>
 							
