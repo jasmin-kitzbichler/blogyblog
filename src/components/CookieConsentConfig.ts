@@ -1,5 +1,5 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
-import { initGA, grantAnalyticsConsent, denyAnalyticsConsent } from '../ga.ts';
+import { initGA, grantAnalyticsConsent, denyAnalyticsConsent } from '../ga';
 
 const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
@@ -8,7 +8,7 @@ export const config: CookieConsentConfig = {
   guiOptions: {
     consentModal: {
       layout: 'cloud',
-      position: 'bottom middle',
+      position: 'bottom center',
     },
     preferencesModal: {
       layout: 'box',
