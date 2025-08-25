@@ -1,12 +1,11 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
-import { initGA, grantAnalyticsConsent, denyAnalyticsConsent } from '../ga';
 
 const MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
 export const config: CookieConsentConfig = {
   guiOptions: {
     consentModal: {
-      layout: 'cloud',
+      layout: 'cloud inline',
       position: 'bottom center',
     },
     preferencesModal: {
@@ -27,34 +26,11 @@ export const config: CookieConsentConfig = {
           label:
             '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4 (dummy)</a>',
           onAccept: () => {
-            console.log('GA4 accepted');
-            if (import.meta.env.PROD && MEASUREMENT_ID) {
-              try {
-                initGA(MEASUREMENT_ID);
-                grantAnalyticsConsent();
-                
-                // Wait a bit for GA to initialize before sending pageview
-                setTimeout(() => {
-                  if (window.gtag) {
-                    window.gtag('event', 'page_view', {
-                      page_location: location.href,
-                      page_path: location.pathname,
-                      page_title: document.title,
-                    });
-                  }
-                }, 100);
-              } catch (error) {
-                console.error('Error initializing GA:', error);
-              }
-            }
+            console.log('ga4 accepted');
+            // TODO: load ga4
           },
           onReject: () => {
-            console.log('GA4 rejected');
-            try {
-              denyAnalyticsConsent();
-            } catch (error) {
-              console.error('Error denying GA consent:', error);
-            }
+            console.log('ga4 rejected');
           },
           cookies: [
             { name: /^_ga/ },
@@ -77,7 +53,8 @@ export const config: CookieConsentConfig = {
           acceptAllBtn: 'Alle akzeptieren',
           acceptNecessaryBtn: 'Nur notwendige',
           showPreferencesBtn: 'Einstellungen',
-          footer: '<a href="/privacy">Datenschutzerklärung</a>',
+          footer:
+            '<a href="/privacy">Datenschutzerklärung</a>',
         },
         preferencesModal: {
           title: 'Datenschutzeinstellungen',
@@ -93,8 +70,7 @@ export const config: CookieConsentConfig = {
                 'Wir verwenden Cookies, um die Nutzung der Website zu analysieren und dir eine bessere Nutzererfahrung zu bieten.',
             },
             {
-              title:
-                'Unbedingt erforderliche Cookies <span class="pm__badge">Immer aktiv</span>',
+              title: 'Unbedingt erforderliche Cookies <span class="pm__badge">Immer aktiv</span>',
               description:
                 'Diese Cookies sind notwendig, damit die Website funktioniert und können nicht deaktiviert werden.',
               linkedCategory: 'necessary',
@@ -121,7 +97,8 @@ export const config: CookieConsentConfig = {
           acceptAllBtn: 'Accept all',
           acceptNecessaryBtn: 'Only necessary',
           showPreferencesBtn: 'Preferences',
-          footer: '<a href="/en/privacy">Privacy Policy</a>',
+          footer:
+            '<a href="/en/privacy">Privacy Policy</a>',
         },
         preferencesModal: {
           title: 'Privacy Settings',
@@ -137,8 +114,7 @@ export const config: CookieConsentConfig = {
                 'We use cookies to analyze the use of this website and improve your experience.',
             },
             {
-              title:
-                'Strictly Necessary Cookies <span class="pm__badge">Always Active</span>',
+              title: 'Strictly Necessary Cookies <span class="pm__badge">Always Active</span>',
               description:
                 'These cookies are essential for the website to function properly and cannot be disabled.',
               linkedCategory: 'necessary',
