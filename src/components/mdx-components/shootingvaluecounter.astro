@@ -1,5 +1,33 @@
 ---
 import { Image } from 'astro:assets';
+
+import img1 from '../../assets/shots/1.png';
+import img2 from '../../assets/shots/2.png';
+import img3 from '../../assets/shots/3.png';
+import img4 from '../../assets/shots/4.png';
+import img5 from '../../assets/shots/5.png';
+import img6 from '../../assets/shots/6.png';
+import img7 from '../../assets/shots/7.png';
+import img8 from '../../assets/shots/8.png';
+import img9 from '../../assets/shots/9.png';
+import img10 from '../../assets/shots/10.png';
+
+const { lang = 'de' } = Astro.props;
+
+const texts = {
+  de: {
+    title: "💡 Wer die 10,1 nicht ehrt, ist die 10,9 nicht wert",
+    next: "Nächster Schuss",
+    reset: "Neustart"
+  },
+  en: {
+    title: "💡 Take care of the 10.1s, and the 10.9s will take care of themselves",
+    next: "Next shot",
+    reset: "Restart"
+  }
+};
+
+const shots = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 ---
 
 <style>
@@ -20,38 +48,78 @@ import { Image } from 'astro:assets';
     cursor: pointer;
   }
 
-  img {
+  .shot-image {
+    display: none;
+    width: 100%;
     max-width: 400px;
-    height: auto;
+    margin: 0 auto;
+  }
+
+  .shot-image.active {
+    display: block;
+  }
+
+  h3{
+    background-color: var(--gray-light);
+    padding: 1rem;
+    border-radius: 0.4rem;
   }
 </style>
 
+<head>
+  <link rel="preload" as="image" href={img2.src} />
+  <link rel="preload" as="image" href={img3.src} />
+  <link rel="preload" as="image" href={img4.src} />
+  <link rel="preload" as="image" href={img5.src} />
+  <link rel="preload" as="image" href={img6.src} />
+  <link rel="preload" as="image" href={img7.src} />
+  <link rel="preload" as="image" href={img8.src} />
+  <link rel="preload" as="image" href={img9.src} />
+  <link rel="preload" as="image" href={img10.src} />
+</head>
+
 <div class="counter-container">
-  <h2>Wer die 10,1 nicht ehrt, ist die 10,9 nicht wert</h2>
-  <img id="schussbild" src="../../../src/assets/shots/1.png" alt="Schussbild" />
+  <h3>{texts[lang].title}</h3>
+
+  <div id="image-wrapper">
+    {shots.map((shot, i) => (
+      <Image
+        class={`shot-image${i === 0 ? ' active' : ''}`}
+        src={shot}
+        alt={`Schuss ${i + 1}`}
+        id={`shot-${i + 1}`} priority
+      />
+    ))}
+  </div>
 
   <div class="button-group">
-    <button id="weiter">Nächster Schuss</button>
-    <button id="reset">Reset</button>
+    <button id="weiter">{texts[lang].next}</button>
+    <button id="reset">{texts[lang].reset}</button>
   </div>
 </div>
 
-<script is:client>
+<script>
   let index = 1;
+  const max = 10;
 
-  const img = document.getElementById('schussbild');
-  const weiter = document.getElementById('weiter');
-  const reset = document.getElementById('reset');
+  const updateDisplay = () => {
+    for (let i = 1; i <= max; i++) {
+      const img = document.getElementById(`shot-${i}`);
+      img.classList.remove('active');
+    }
+    const current = document.getElementById(`shot-${index}`);
+    if (current) current.classList.add('active');
+  };
 
-  weiter.addEventListener('click', () => {
-    if (index < 10) {
+  document.getElementById('weiter').addEventListener('click', () => {
+    if (index < max) {
       index++;
-      img.src = `../../../src/assets/shots/${index}.png`;
+      updateDisplay();
     }
   });
 
-  reset.addEventListener('click', () => {
+  document.getElementById('reset').addEventListener('click', () => {
     index = 1;
-    img.src = `../../../src/assets/shots/${index}.png`;
+    updateDisplay();
   });
 </script>
