@@ -53,7 +53,7 @@ const {
     box-shadow: var(--box-shadow-card, 0 8px 24px rgba(0,0,0,.08));
     max-width: 400px;
     float: right;
-    margin: 0 0 0 1rem;
+      margin: 0.5rem;
   }
 
   .meta {
@@ -144,6 +144,12 @@ const {
     overflow: hidden;
     transition: max-height .25s ease;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (max-width: 550px) {
+    .lyrics-card{
+      margin: 0.5rem auto;
+    }
   }
 
 </style>

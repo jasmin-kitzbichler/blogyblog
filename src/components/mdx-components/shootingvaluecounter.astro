@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+---
+
+<style>
+  .counter-container {
+    text-align: center;
+  }
+
+  .button-group {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 400px;
+    height: auto;
+  }
+</style>
+
+<div class="counter-container">
+  <h2>Wer die 10,1 nicht ehrt, ist die 10,9 nicht wert</h2>
+  <img id="schussbild" src="../../../src/assets/shots/1.png" alt="Schussbild" />
+
+  <div class="button-group">
+    <button id="weiter">Nächster Schuss</button>
+    <button id="reset">Reset</button>
+  </div>
+</div>
+
+<script is:client>
+  let index = 1;
+
+  const img = document.getElementById('schussbild');
+  const weiter = document.getElementById('weiter');
+  const reset = document.getElementById('reset');
+
+  weiter.addEventListener('click', () => {
+    if (index < 10) {
+      index++;
+      img.src = `../../../src/assets/shots/${index}.png`;
+    }
+  });
+
+  reset.addEventListener('click', () => {
+    index = 1;
+    img.src = `../../../src/assets/shots/${index}.png`;
+  });
+</script>

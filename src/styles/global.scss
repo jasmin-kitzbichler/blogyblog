@@ -259,12 +259,13 @@
 
   .blogtextwithimage {
 
-	.image{
+	  
+	  .image{
+		margin: 1rem auto;
 		border: 3px solid #fff;
 	    box-shadow: var(--box-shadow-card, 0 8px 24px rgba(0,0,0,.08));
 		border-radius: 16px;
 		padding: 1rem;
-		margin: 0 0 0 1rem;
 		float: inline-end;
 		width: 300px;
 		p{
@@ -275,6 +276,23 @@
 	}
   }
 
+	@media (max-width: 550px){
+		.blogtextwithimage{
+			display: flex;
+			flex-direction: column;
+
+			h2{
+				order:1;
+			}
+
+			p{
+				order:2;
+			}
+			.image{
+				order:3
+			}
+		}
+	}	
   /* Image Grid Post*/
 
   .post-image-grid {
