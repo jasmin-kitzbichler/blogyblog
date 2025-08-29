@@ -1,0 +1,73 @@
+---
+
+//NOT USED
+
+
+
+import { SITE_URL } from '../consts';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description, lang } = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, SITE_URL).toString();
+const encodedTitle = encodeURIComponent(title);
+const encodedDesc = description ? encodeURIComponent(description) : '';
+const encodedUrl = encodeURIComponent(pageUrl);
+---
+
+
+<section class="share-buttons">
+    <div class="text">
+        <p class="share-label">
+            {lang === 'en' ? 'Share this post on:' : 'Teile den Beitrag auf:'}
+        </p>
+    </div>
+  <div class="buttons">
+    <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">𝕏</a>
+    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">f</a>
+    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">in</a>
+    <a href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener noreferrer">🟢</a>
+    <a href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">✈️</a>
+    <a href={`mailto:?subject=${encodedTitle}&body=${encodedDesc}%0A%0A${encodedUrl}`}>✉️</a>
+  </div>
+</section>
+
+
+<style>
+  .share-buttons {
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttons a,
+  .buttons button {
+    appearance: none;
+    border: none;
+    padding: .5rem .8rem;
+    font-size: 1rem;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .buttons button:hover,
+  .buttons a:hover {
+    filter: brightness(0.95);
+  }
+</style>

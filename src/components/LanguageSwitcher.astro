@@ -1,31 +1,92 @@
 ---
-const currentPath = Astro.url.pathname;
-const isEnglish = currentPath.startsWith('/en');
+import { getCollection } from 'astro:content';
 
-// Ziel-Link zur jeweils anderen Sprache
-const germanLink = currentPath.replace(/^\/en/, '') || '/';
-const englishLink = currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`;
+const lang = Astro.props.lang ?? (Astro.url.pathname.startsWith('/en') ? 'en' : 'de');
+const groupId = Astro.props.groupId;
+
+// Standard-Link & Sichtbarkeiten
+let switchLink = '';
+let showGerman = true;
+let showEnglish = true;
+
+const isProject = Astro.url.pathname.includes('/projects/');
+const collection = isProject ? 'projects' : 'blog';
+
+if (groupId) {
+  const entries = await getCollection(collection);
+  const otherLang = lang === 'de' ? 'en' : 'de';
+
+  const otherPost = entries.find(
+    (p) => (p.data.groupId ?? p.id) === groupId && p.data.lang === otherLang
+  );
+
+  switchLink = otherPost
+    ? (lang === 'de'
+        ? `/en/${collection}/${otherPost.id}/`
+        : `/${collection}/${otherPost.id}/`)
+    : '';
+
+  if (!otherPost) {
+    if (lang === 'de') showEnglish = false;
+    if (lang === 'en') showGerman = false;
+  }
+} else {
+  // Kein groupId = normale Seite wie Start, About, etc.
+  switchLink =
+    lang === 'de'
+      ? '/en' + Astro.url.pathname
+      : Astro.url.pathname.replace(/^\/en/, '') || '/';
+}
 ---
+
 
 <div class="language-switcher">
   <details>
     <summary>
-      <span aria-label={isEnglish ? "English" : "Deutsch"}>
-        {isEnglish ? "🇬🇧" : "🇩🇪"}
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#fff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>      </span>
+      <span aria-label={lang === 'en' ? "English" : "Deutsch"}>
+        {lang === 'en' ? "🇬🇧" : "🇩🇪"}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path fill="#fff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
+        </svg>
+      </span>
     </summary>
     <ul>
-      <li><a href={germanLink}>🇩🇪 Deutsch</a></li>
-      <li><a href={englishLink}>🇬🇧 English</a></li>
+      <li>
+        {lang === 'de' ? (
+          <span class="lang-active">🇩🇪 Deutsch</span>
+        ) : showGerman ? (
+          <a class="lang-link" href={switchLink}>🇩🇪 Deutsch</a>
+        ) : (
+          <span class="lang-disabled">🇩🇪 Deutsch</span>
+        )}
+      </li>
+      <li>
+        {lang === 'en' ? (
+          <span class="lang-active">🇬🇧 English</span>
+        ) : showEnglish ? (
+          <a class="lang-link" href={switchLink}>🇬🇧 English</a>
+        ) : (
+          <span class="lang-disabled">🇬🇧 English</span>
+        )}
+      </li>
     </ul>
   </details>
 </div>
 
+
+
+
 <style lang="scss">
-.language-switcher {
-  position: relative;
-  font-size: 1rem;
-}
+  .language-switcher {
+    position: relative;
+    font-size: 1rem;
+  }
+  .language-switcher .inactive {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+  }
 
 .language-switcher summary {
   list-style: none;
@@ -67,7 +128,7 @@ const englishLink = currentPath.startsWith('/en') ? currentPath : `/en${currentP
   margin: 0;
 }
 
-.language-switcher a {
+.language-switcher a, .language-switcher li span {
   text-decoration: none;
   color: #222;
   display: block;
@@ -77,5 +138,10 @@ const englishLink = currentPath.startsWith('/en') ? currentPath : `/en${currentP
 
 .language-switcher a:hover {
   background: #f0f0f0;
+}
+
+.language-switcher .lang-disabled {
+opacity: 0.5;
+cursor: not-allowed;
 }
 </style>

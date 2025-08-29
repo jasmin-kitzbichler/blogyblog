@@ -7,21 +7,15 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import { categoryMap } from "../../../categoryMap";
-
-
 import { getLocalizedPosts } from '../../../getLocalizedPosts';
 
 const allPosts = await getCollection('blog');
 const lang = 'en';
 
-
-
 const posts = getLocalizedPosts(allPosts, lang)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-
 const categories = Object.entries(categoryMap);
-
 
 const getLangEmoji = (lang: string): string => {
   switch (lang) {
@@ -33,120 +27,118 @@ const getLangEmoji = (lang: string): string => {
       return '🌐';
   }
 };
+
+const getPostUrl = (post) =>
+  `${post.data.lang === 'en' ? '/en' : ''}/blog/${post.id}/`;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title="Blog" description="Thoughts, experiences and behind-the-scenes stories - my personal blog on design, web, sports, and life in between."
- />
-	</head>
-	<body>
-		<Header />
-		<main>
-  <section class="blog-overview-section">
-    <h1 class="subpage-heading">Blog Collection</h1>
-    <p class="subpage-desc">
-      Welcome to my little thought archive.<br />
-      Here you’ll find everything that moves, challenges, or inspires me - sometimes structured, sometimes beautifully messy.
-      Always authentic, honest, and without the pressure of perfection. Written with heart, brain, and a healthy dose of coffee.
-    </p>
+  <head>
+    <BaseHead 
+      title="Blog" 
+      description="Thoughts, experiences and behind-the-scenes stories - my personal blog on design, web, sports, and life in between." 
+    />
+  </head>
+  <body>
+    <Header />
 
-    <div class="category-filter">
-      <div class="blog-filter">
-        {
-          Object.entries(categoryMap).map(([key, value]) => (
-            <a
-              href="#"
-              class="filter-pill"
-              data-category={key}
-            >
-              <span>{value.emoji} {value.label[lang]}</span>
-            </a>
-          ))
-        }
-        <a href="#" class="filter-pill reset hidden">✖️ Show all</a>
-      </div>
-    </div>
+    <main>
+      <section class="blog-overview-section">
+        <h1 class="subpage-heading">Blog Collection</h1>
+        <p class="subpage-desc">
+          Welcome to my little thought archive.<br />
+          Here you’ll find everything that moves, challenges, or inspires me – sometimes structured, sometimes beautifully messy.
+          Always authentic, honest, and without the pressure of perfection. Written with heart, brain, and a healthy dose of coffee.
+        </p>
 
-    <ul>
-      {
-        posts.map((post) => (
-          <li class="blog-post" data-category={post.data.category}>
-            <a href={`/blog/${post.id}/`}>
-              <div class="blog-image">
-                {post.data.heroImage && (
-                  <Image src={post.data.heroImage} alt="" />
-                )}
-              </div>
-              <div class="blog-details">
-                <p class="lang">{getLangEmoji(post.data.lang)}</p>
-                <div class="facts">
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                  {post.data.category && (
-                    <p class="category">{categoryMap[post.data.category]?.emoji}</p>
-                  )}
-                </div>
-                <h4 class="title">{post.data.title}</h4>
-                <p class="desc">{post.data.description}</p>
-              </div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-</main>
+        <div class="category-filter">
+          <div class="blog-filter">
+            {
+              categories.map(([key, value]) => (
+                <a
+                  href="#"
+                  class="filter-pill"
+                  data-category={key}
+                >
+                  <span>{value.emoji} {value.label[lang]}</span>
+                </a>
+              ))
+            }
+            <a href="#" class="filter-pill reset hidden">✖️ Show all</a>
+          </div>
+        </div>
 
-		<FooterEng />
+        <ul>
+          {
+            posts.map((post) => (
+              <li class="blog-post" data-category={post.data.category}>
+                <a href={getPostUrl(post)}>
+                  <div class="blog-image">
+                    {post.data.heroImage && (
+                      <Image src={post.data.heroImage} alt="" />
+                    )}
+                  </div>
+                  <div class="blog-details">
+                    <p class="lang">{getLangEmoji(post.data.lang)}</p>
+                    <div class="facts">
+                      <p class="date">
+                        <FormattedDate date={post.data.pubDate} />
+                      </p>
+                      {post.data.category && (
+                        <p class="category">{categoryMap[post.data.category]?.emoji}</p>
+                      )}
+                    </div>
+                    <h4 class="title">{post.data.title}</h4>
+                    <p class="desc">{post.data.description}</p>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
 
-		<script>
-			
-			document.addEventListener('DOMContentLoaded', () => {
-				const filterLinks = document.querySelectorAll('.filter-pill');
-				const posts = document.querySelectorAll('.blog-post');
-				const resetBtn = document.querySelector('.filter-pill.reset');
+    <FooterEng />
 
-				filterLinks.forEach(link => {
-				link.addEventListener('click', (event) => {
-					event.preventDefault();
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const filterLinks = document.querySelectorAll('.filter-pill');
+        const posts = document.querySelectorAll('.blog-post');
+        const resetBtn = document.querySelector('.filter-pill.reset');
 
-					const selectedCategory = link.getAttribute('data-category');
-					const isReset = link.classList.contains('reset');
+        filterLinks.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
 
-					filterLinks.forEach(l => l.classList.remove('active'));
-					if (!isReset) link.classList.add('active');
+            const selectedCategory = link.getAttribute('data-category');
+            const isReset = link.classList.contains('reset');
 
-					posts.forEach(post => {
-					const postCategory = post.getAttribute('data-category');
-					if (isReset || postCategory === selectedCategory) {
-						post.classList.remove('hidden');
-					} else {
-						post.classList.add('hidden');
-					}
-					});
+            filterLinks.forEach(l => l.classList.remove('active'));
+            if (!isReset) link.classList.add('active');
 
-					// Button nur zeigen, wenn gefiltert wird
-					if (resetBtn instanceof HTMLElement) {
+            posts.forEach(post => {
+              const postCategory = post.getAttribute('data-category');
+              if (isReset || postCategory === selectedCategory) {
+                post.classList.remove('hidden');
+              } else {
+                post.classList.add('hidden');
+              }
+            });
 
-					if (!isReset) {
-						resetBtn.classList.remove('hidden');
-					} else {
-						resetBtn.classList.add('hidden');
-					}
-				}
-				});
-				});
-			});
-</script>
-
-		
-	</body>
-
-	
-
+            if (resetBtn instanceof HTMLElement) {
+              if (!isReset) {
+                resetBtn.classList.remove('hidden');
+              } else {
+                resetBtn.classList.add('hidden');
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
 
 <style lang="scss">

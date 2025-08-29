@@ -7,6 +7,7 @@ import FooterEng from '../components/en-components/FooterEng.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
+
 type Props = CollectionEntry<'projects'>['data'];
 
 const { title, description, pubDate, updatedDate, image, imageAlt, lang } = Astro.props;
@@ -38,7 +39,7 @@ const imageAltText = imageAlt ?? "";
   </head>
 
   <body>
-    <Header />
+    <Header lang={lang}/>
     <main>
       <article>
         <h1 class="blog-title subpage-heading">{title}</h1>

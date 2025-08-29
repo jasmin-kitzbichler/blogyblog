@@ -5,33 +5,30 @@ import { Image } from "astro:assets";
 import { getLocalizedPosts } from "../getLocalizedPosts";
 import { categoryMap } from "../categoryMap";
 
-// 1. Lade alle Blogposts
+// Alle Blogposts holen
 const allPosts = await getCollection("blog");
 
-// 2. Hole die aktuelle Sprache aus dem Pfad
-const lang = Astro.url.pathname.startsWith("/en") ? "en" : "de";
+// Sprache aus URL ableiten
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de";
 
-// 3. Gruppiere und filtere mit deiner Hilfsfunktion
-const localizedPosts = getLocalizedPosts(allPosts, lang);
-
-// 4. Sortieren und beschneiden
-const posts = localizedPosts
+// Lokalisierte Blogposts holen
+const localizedPosts = getLocalizedPosts(allPosts, currentLang)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-// 5. Sprach-Emoji-Funktion
+// Helper: Sprache-zu-Emoji
 const getLangEmoji = (lang: string): string => {
   switch (lang) {
-    case "de":
-      return "🇩🇪";
-    case "en":
-      return "🇬🇧";
-    default:
-      return "🌐";
+    case "de": return "🇩🇪";
+    case "en": return "🇬🇧";
+    default: return "🌐";
   }
 };
----
 
+// Helper: korrekter Link zum Post
+const getPostUrl = (post) =>
+  `${post.data.lang === "en" ? "/en" : ""}/blog/${post.id}/`;
+---
 
 <section class="blog-preview">
   <div class="width-container">
@@ -39,11 +36,12 @@ const getLangEmoji = (lang: string): string => {
     <div class="section-heading">
       <h2>Neues im Blog</h2>
     </div>
+
     <ul>
       {
-        posts.map((post) => (
+        localizedPosts.map((post) => (
           <li>
-            <a href={`/blog/${post.id}/`}>
+            <a href={getPostUrl(post)}>
               <div class="blogteaserImage">
                 {post.data.heroImage && (
                   <Image src={post.data.heroImage} alt={post.data.heroAlt ?? ""} />
@@ -56,20 +54,22 @@ const getLangEmoji = (lang: string): string => {
                   <FormattedDate date={post.data.pubDate} />
                 </p>
               </div>
-            <div class="cardbottom">
+              <div class="cardbottom">
                 <h3>{post.data.title}</h3>
                 <p>{post.data.description}</p>
-            </div>
+              </div>
             </a>
           </li>
         ))
       }
     </ul>
+
     <p class="more-link">
-      <a href="/blog">Alle Beiträge ansehen →</a>
+      <a href={currentLang === 'en' ? '/en/blog' : '/blog'}>Alle Beiträge ansehen →</a>
     </p>
   </div>
 </section>
+
 
 <style lang="scss">
   .blog-preview {

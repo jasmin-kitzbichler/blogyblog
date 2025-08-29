@@ -6,52 +6,72 @@ import { SITE_TITLE } from '../consts';
 import { Image } from 'astro:assets';
 import logo from '../assets/logo.png';
 
-
-const currentPath = Astro.url.pathname;
-const isEnglish = currentPath.startsWith('/en');
-
 import navDe from '../i18n/nav/de.ts';
 import navEn from '../i18n/nav/en.ts';
 
-const nav = isEnglish ? navEn : navDe;
-const langPrefix = isEnglish ? '/en' : '';
+const currentPath = Astro.url.pathname;
+const lang = Astro.props.lang ?? (currentPath.startsWith('/en') ? 'en' : 'de');
+const langPrefix = lang === 'en' ? '/en' : '';
+const nav = lang === 'en' ? navEn : navDe;
+
+// groupId erkennen für blog UND projects – mit statischen globs
+let groupId: string | undefined = undefined;
+const blogMatch = currentPath.match(/^\/(?:en\/)?blog\/([^/]+)\/?$/);
+const projectMatch = currentPath.match(/^\/(?:en\/)?projects\/([^/]+)\/?$/);
+
+if (blogMatch || projectMatch) {
+  const collection = blogMatch ? 'blog' : 'projects';
+  const slug = (blogMatch ?? projectMatch)[1];
+
+  const blogEntries = await import.meta.glob<{ frontmatter: any }>(
+    '../content/blog/*.mdx',
+    { eager: true }
+  );
+  const projectEntries = await import.meta.glob<{ frontmatter: any }>(
+    '../content/projects/*.mdx',
+    { eager: true }
+  );
+
+  const entries = collection === 'blog' ? blogEntries : projectEntries;
+
+  for (const [path, entry] of Object.entries(entries)) {
+    if (path.includes(`${slug}.mdx`)) {
+      groupId = entry.frontmatter.groupId ?? slug;
+      break;
+    }
+  }
+}
 ---
 
-<header  class="">
+
+<header>
   <div class="top-bar">
-    <!-- Site title / logo -->
     <div class="site-title">
-      <a href={`${langPrefix}/`}><Image src={logo} alt=""/>{SITE_TITLE}</a>
+      <a href={`${langPrefix}/`}><Image src={logo} alt="" />{SITE_TITLE}</a>
     </div>
 
-  	<div class="language">
-	  <LanguageSwitcher />
-	</div>
-	
-	</div>
+    <div class="language">
+      <LanguageSwitcher lang={lang} groupId={groupId} />
+    </div>
+  </div>
 
-    
+  <div class="mainnavcontainer">
+    <input class="side-menu" type="checkbox" id="side-menu" />
+    <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
 
-
-
-	<div class="mainnavcontainer">
-    <!-- Hamburger icon -->
-        <input class="side-menu" type="checkbox" id="side-menu"/>
-        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-    <!-- Main nav -->  
-		<nav class="main-nav">
-		  <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/about`}>{nav.about}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/services`}>{nav.services}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/blog`}>{nav.blog}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/projects`}>{nav.projects}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/gallery`}>{nav.gallery}</HeaderLink>
-		  <HeaderLink href={`${langPrefix}/contact`}>{nav.contact}</HeaderLink>
-		</nav>
-		
-	</div>
-
+    <nav class="main-nav">
+      <HeaderLink href={`${langPrefix}/`}>{nav.home}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/about`}>{nav.about}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/services`}>{nav.services}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/blog`}>{nav.blog}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/projects`}>{nav.projects}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/gallery`}>{nav.gallery}</HeaderLink>
+      <HeaderLink href={`${langPrefix}/contact`}>{nav.contact}</HeaderLink>
+    </nav>
+  </div>
 </header>
+
+
 
 <style lang="scss">
 header {
