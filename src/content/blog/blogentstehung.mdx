@@ -1,0 +1,64 @@
+---
+title: "Wie dieser Blog entstanden ist"
+pubDate: "2025-08-29"
+category: 'tech'
+description: "Vom ersten Impuls bis zur 'fertigen Seite', ein ehrlicher Blick hinter die Kulissen dieser Webseite."
+groupId: "blogjourney"
+lang: "de"
+heroImage: '../../assets/Website.jpg'
+heroAlt: ""
+---
+
+Die Idee, meine Gedanken, Projekte und Fotos auf einer eigenen Plattform zu sammeln, geisterte mir schon eine Weile durch meinen Kopf. Ich war mich nicht ganz sicher wie ichs am besten umsetzen sollte, weil die Idee es einfach auf Instagram zu posten hat mir nicht richtig gefallen. Und irgendwann wurde mir klar:
+
+Ich wollte meine eigene Webseite, selbst programmiert und von allem etwas drin was mich so beschäftigt: ein bisschen Portfolio, ein bisschen Fotogalerie, ein bisschen Sportschießen und noch mehr. Und das alles gepaart mit einem Blog und einer Projektübersicht. Aber auch etwas, das nicht aussieht wie der nächste Baukasten-Blog mit dem typischen langweiligen Design. 
+
+Wordpress war auch nicht wirklich eine Option, weil a) wollte ich die volle Kontrolle über die Webseite und mich nicht an irgendwelche Wordpress Spezifikationen anpassen b) HASSE ich den Wordpress-Plugin Dschungel c) wollte ich eine kostengünstige Lösung und d) wenn ich irgendwelche Features will, dann will ich sie einfach bauen können. 
+
+Also war die einzige Option es von Grundauf selbst zu kreieren, so ist es technisch schlank, optisch clean und inhaltlich flexibel; eben ein Ort, an dem sowohl persönliche Geschichten als auch professionelle Projekte Platz finden.
+
+TBH ists manchmal echt gut, dass man am Anfang bei so Projekten nicht weiß wie viel Arbeit auf einen wirklich wartet. 😅
+
+## Das Setup: Astro, MDX und ein Hauch Wahnsinn
+
+Nach einiger Überlegung habe ich mich für Astro mit MDX entschieden. Warum? Weil ich Inhalte gerne in Markdown schreiben wollte, aber gleichzeitig die Möglichkeit haben wollte, flexibel Komponenten einzubinden – sei es für Bildergalerien, interaktive Elemente oder einfach nur ein paar nette Details im Layout.
+
+MDX war dafür ideal. Es erlaubt mir, Text und Komponenten nahtlos zu kombinieren; perfekt für kleine Elemente in Blogbeiträgen die den Text interessanter und interaktiver machen. Vielleicht ein bisschen nerdig, aber so Spielerein machen das ganze halt doch lustiger.
+
+import ShootingValueCounter from '../../components/mdx-components/shootingvaluecounter.astro'
+
+### Beispiel-Komponente
+
+<ShootingValueCounter lang="de"/>
+
+## Routing: Ordnung im zweisprachigen Chaos
+
+Deutsch oder Englisch? das war meine persönliche Gretchen Frage. Und genau wie Faust flüchtete ich von der Frage. Wie du siehst kann man auf jeder Seite zwischen Deutsch und Englisch umstellen, sogar wenn du gerade einen Post liest, kannst du einfach auf die andere Sprache umstellen. Alle Projekt-Postings gibts auf Deutsch und Englisch. Aber bei den Blog-Posts wollte ich mir doch die Option offen lassen, dass ich, wenn sichs mal richtig anfühlt, einen Beitrag auch mal nur in einer Sprache veröffentlichen kann.
+
+Und diese ganzen Anforderungen erforderten ein etwas kompliziertes Routing-System, das ein paar Versuche und einige Male durch alles durchklicken bedarft hat, bis alles funktioniert.
+
+## Design: Klar, persönlich, meins
+
+Von Anfang an war mir wichtig, dass der Blog nicht nach generischem Template aussieht. Ich wollte etwas, das zu mir passt. Also habe ich mit Farben, Schriften und Layouts herumprobiert, bis es sich richtig angefühlt hat. Nicht perfekt, aber echt.
+
+Der Stil ist minimalistisch, aber mit Persönlichkeit. Klar strukturiert, aber nicht steril. Und ganz bewusst ohne 3000 Animationen oder Cookie-Banner-Wirrwarr.
+
+## Der Inhalt: Zwischen Schießstand und Self-Reflection
+
+Was den Blog ausmacht, sind die Themen, die mich bewegen, ob im Training, im Alltag, beim Schreiben oder Nachdenken. Einige Beiträge entstehen spontan (wie die „26 Dinge“-Liste), andere wachsen über Wochen. Manche sind analytisch, andere eher emotional.
+
+Und genau das soll auch so bleiben. Ich will nicht in eine Nische gezwungen werden, sondern Raum haben für all die Facetten, die mich ausmachen.
+
+## Das Ziel: Kein Ziel.
+
+Okay, das klingt jetzt widersprüchlich. Aber ich meine damit: Ich baue diesen Blog nicht, weil ich eine Influencer-Karriere plane oder den perfekten SEO-Traffic-Funnel aufsetzen will.
+
+Ich mache das, weil ich gerne schreibe. Weil ich es liebe, Dinge zu gestalten. Und weil ich gerne einen Ort habe, an dem alles zusammenkommt, meine Projekte, meine Texte, meine Gedanken.
+
+## Fast fertig…
+
+Wenn ihr das liest, dann ist der Blog endlich online. Noch nicht in seiner Endform, aber Beiträge lassen sich einfach schreiben und pflegen, neue Ideen umsetzen und das Ganze fühlt sich nach mir an.
+
+Und ehrlich: **Fertig wird das hier sowieso nie.** Ich bin jemand, der gerne Dinge weiterdenkt, verbessert, manchmal auch wieder verwirft. Heißt: Ich werde hier und da immer wieder etwas ändern, ergänzen oder umstellen, einfach, weil mir neue Ideen kommen oder ich mich an was sattgesehen hab. Der Blog wächst also mit mir mit. Und genau das machts für mich auch so schön.
+
+Wenn du das hier liest: Willkommen. Schön, dass du da bist. Und danke, dass du ein Stück dieses Wegs mitgehst. :)
